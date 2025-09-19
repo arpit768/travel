@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhutan Adventures Dashboard - Nepal Adventures</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explore Bhutan - The Last Shangri-La, Thunder Dragon Kingdom adventures">
+    <meta name="keywords" content="bhutan, thunder dragon, shangri-la, monastery, culture, happiness">
+    <meta name="author" content="Nepal Adventures">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg,
+                rgba(255, 215, 0, 0.95) 0%,
+                rgba(255, 140, 0, 0.9) 30%,
+                rgba(218, 165, 32, 0.85) 70%,
+                rgba(184, 134, 11, 0.9) 100%),
+                url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3') center/cover no-repeat fixed;
+            min-height: 100vh;
+            font-family: var(--font-family);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating Bhutan elements */
+        .bhutan-element {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2rem;
+            opacity: 0.1;
+            z-index: 1;
+            animation: floatBhutan 22s ease-in-out infinite;
+        }
+
+        @keyframes floatBhutan {
+            0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            25% { transform: translateY(-35px) translateX(25px) rotate(45deg); }
+            50% { transform: translateY(-70px) translateX(-15px) rotate(180deg); }
+            75% { transform: translateY(-45px) translateX(-35px) rotate(270deg); }
+        }
+
+        .country-dashboard {
+            backdrop-filter: blur(20px);
+            padding: 2rem 0;
+            min-height: 100vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border-radius: var(--border-radius-large);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideDown 1s ease-out;
+        }
+
+        .dashboard-header h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .dashboard-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-large);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+            animation: floatIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(255, 140, 0, 0.3);
+        }
+
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .region-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border-radius: var(--border-radius-large);
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(255, 140, 0, 0.2);
+            transition: all 0.3s ease;
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .region-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(255, 140, 0, 0.3);
+        }
+
+        .region-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .region-icon {
+            font-size: 2.5rem;
+        }
+
+        .region-title {
+            color: #ff8c00;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .explore-btn {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 140, 0, 0.3);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff8c00;
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.1);
+            background: white;
+            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.3);
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.3s; }
+        .stat-card:nth-child(3) { animation-delay: 0.5s; }
+        .stat-card:nth-child(4) { animation-delay: 0.7s; }
+
+        .region-card:nth-child(1) { animation-delay: 0.2s; }
+        .region-card:nth-child(2) { animation-delay: 0.4s; }
+        .region-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .adventures-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .adventures-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 140, 0, 0.1);
+            color: var(--text-color);
+        }
+
+        .adventures-list li:last-child {
+            border-bottom: none;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .happiness-quote {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            text-align: center;
+            color: white;
+            font-style: italic;
+            border-left: 4px solid #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <a href="../dashboard.html" class="back-btn" title="Back to Dashboard">🏠</a>
+
+    <div class="country-dashboard">
+        <div class="dashboard-header">
+            <h1>
+                <span style="font-size: 4rem;">🏯</span>
+                Bhutan Adventures
+            </h1>
+            <p>The Last Shangri-La - Where Gross National Happiness matters most</p>
+
+            <div class="happiness-quote">
+                "Happiness is a place between too much and too little." - Finnish Proverb (loved in Bhutan)
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <button onclick="window.location.href='../pages/adventures.html?country=bhutan'" class="explore-btn">
+                    🎒 Explore All Bhutan Adventures
+                </button>
+                <button onclick="window.location.href='../pages/guides.html?country=bhutan'" class="explore-btn" style="background: linear-gradient(135deg, #daa520, #b8860b);">
+                    🗺️ Find Bhutan Guides
+                </button>
+            </div>
+        </div>
+
+        <div class="stats-overview">
+            <div class="stat-card">
+                <div class="stat-number" id="total-adventures">0</div>
+                <h3>Adventures</h3>
+                <p>Happy journeys</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="avg-price">$0</div>
+                <h3>Avg. Price</h3>
+                <p>Starting from</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="happiness-index">100%</div>
+                <h3>Happiness Index</h3>
+                <p>Guaranteed smiles</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-days">0</div>
+                <h3>Total Days</h3>
+                <p>Peaceful time</p>
+            </div>
+        </div>
+
+        <div class="regions-grid">
+            <div class="region-card">
+                <div class="region-header">
+                    <span class="region-icon">🏯</span>
+                    <h3 class="region-title">Thimphu & Paro</h3>
+                </div>
+                <p>Capital city and cultural heart with Tiger's Nest Monastery and dzongs.</p>
+                <ul class="adventures-list" id="thimphu-adventures">
+                    <li>Coming soon - Cultural tours of Thimphu</li>
+                    <li>Tiger's Nest Monastery trek</li>
+                    <li>Traditional festival experiences</li>
+                </ul>
+                <button onclick="exploreRegion('thimphu')" class="explore-btn">🏯 Explore Thimphu</button>
+            </div>
+
+            <div class="region-card">
+                <div class="region-header">
+                    <span class="region-icon">🏔️</span>
+                    <h3 class="region-title">Eastern Bhutan</h3>
+                </div>
+                <p>Remote valleys with pristine nature and traditional Bhutanese lifestyle.</p>
+                <ul class="adventures-list" id="eastern-adventures">
+                    <li>Coming soon - Eastern valleys trek</li>
+                    <li>Traditional weaving villages</li>
+                    <li>Rhododendron forests</li>
+                </ul>
+                <button onclick="exploreRegion('eastern')" class="explore-btn">🏔️ Explore Eastern Bhutan</button>
+            </div>
+
+            <div class="region-card">
+                <div class="region-header">
+                    <span class="region-icon">🙏</span>
+                    <h3 class="region-title">Spiritual Retreats</h3>
+                </div>
+                <p>Meditation retreats, monastery stays, and spiritual awakening journeys.</p>
+                <ul class="adventures-list" id="spiritual-adventures">
+                    <li>Coming soon - Meditation retreats</li>
+                    <li>Monastery stay experiences</li>
+                    <li>Buddhist philosophy courses</li>
+                </ul>
+                <button onclick="exploreRegion('spiritual')" class="explore-btn">🙏 Explore Spirituality</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            if (!window.API.utils.isLoggedIn()) {
+                window.location.href = '../pages/login.html';
+                return;
+            }
+
+            // Create floating Bhutan elements
+            createFloatingElements();
+
+            // Load Bhutan adventures data
+            loadBhutanData();
+        });
+
+        function createFloatingElements() {
+            const elements = ['🏯', '🙏', '☸️', '🎭', '🏔️', '🐉', '🔔', '🌸', '🦋', '✨'];
+
+            for (let i = 0; i < 8; i++) {
+                const element = document.createElement('div');
+                element.className = 'bhutan-element';
+                element.textContent = elements[Math.floor(Math.random() * elements.length)];
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.top = Math.random() * 100 + 'vh';
+                element.style.animationDelay = Math.random() * 22 + 's';
+                element.style.animationDuration = (Math.random() * 12 + 18) + 's';
+                document.body.appendChild(element);
+            }
+        }
+
+        async function loadBhutanData() {
+            try {
+                // Load all Bhutan adventures
+                const response = await window.API.adventures.getAll({ country: 'bhutan' });
+                const adventures = response.data || [];
+
+                // Update overall stats
+                updateOverallStats(adventures);
+
+            } catch (error) {
+                console.error('Error loading Bhutan data:', error);
+                document.getElementById('total-adventures').textContent = 'Error';
+            }
+        }
+
+        function updateOverallStats(adventures) {
+            // Total adventures
+            document.getElementById('total-adventures').textContent = adventures.length || 'Soon';
+
+            // Average price
+            const avgPrice = adventures.length > 0
+                ? Math.round(adventures.reduce((sum, adv) => sum + adv.pricing.basePrice, 0) / adventures.length)
+                : 'Soon';
+            document.getElementById('avg-price').textContent = adventures.length > 0 ? `$${avgPrice}` : avgPrice;
+
+            // Total days
+            const totalDays = adventures.reduce((sum, adv) => sum + adv.duration.days, 0);
+            document.getElementById('total-days').textContent = totalDays || 'Soon';
+
+            // Happiness index is always 100% in Bhutan! 😊
+            document.getElementById('happiness-index').textContent = '100%';
+        }
+
+        function exploreRegion(region) {
+            // For now, show a special Bhutan message
+            alert(`🏯 Welcome to Bhutan - The Land of Gross National Happiness!\n\n${region} adventures are being carefully crafted to ensure they align with Bhutan's philosophy of sustainable tourism and cultural preservation.\n\nStay tuned for mindful adventures that respect local traditions and contribute to community wellbeing! 🙏`);
+        }
+
+        // Add interactive effects
+        document.querySelectorAll('.stat-card, .region-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = this.classList.contains('stat-card')
+                    ? 'translateY(-8px) scale(1.05)'
+                    : 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add a special happiness effect
+        setInterval(() => {
+            const happinessCard = document.querySelector('.stat-card:nth-child(3)');
+            if (happinessCard) {
+                happinessCard.style.background = 'rgba(255, 215, 0, 0.2)';
+                setTimeout(() => {
+                    happinessCard.style.background = 'rgba(255, 255, 255, 0.1)';
+                }, 1000);
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

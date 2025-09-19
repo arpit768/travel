@@ -1,0 +1,423 @@
+/**
+ * Performance Boost CSS
+ * Optimized animations and faster UI response
+ */
+
+/* Global Performance Optimizations */
+:root {
+    /* Ultra-fast transitions */
+    --ultra-fast: 80ms cubic-bezier(0.4, 0, 0.2, 1);
+    --lightning-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
+    --quick: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Hardware acceleration */
+    --gpu-acceleration: translateZ(0);
+}
+
+/* Force hardware acceleration on key elements */
+.navbar,
+.hero,
+.adventure-card,
+.btn,
+.dropdown,
+.modal {
+    transform: var(--gpu-acceleration);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Faster button animations */
+.btn {
+    transition: all var(--ultra-fast) !important;
+    will-change: transform, background-color, box-shadow;
+}
+
+.btn:hover {
+    transition-duration: var(--ultra-fast) !important;
+}
+
+.btn:active {
+    transition-duration: 50ms !important;
+    transform: scale(0.95) var(--gpu-acceleration) !important;
+}
+
+/* Lightning-fast card animations */
+.adventure-card,
+.feature-card,
+.guide-card {
+    transition: all var(--lightning-fast) !important;
+    will-change: transform, box-shadow;
+}
+
+.adventure-card:hover,
+.feature-card:hover,
+.guide-card:hover {
+    transform: translateY(-4px) var(--gpu-acceleration) !important;
+    transition-duration: var(--ultra-fast) !important;
+}
+
+/* Super fast dropdown animations */
+.dropdown-options,
+.custom-dropdown .dropdown-options {
+    transition:
+        opacity var(--ultra-fast),
+        transform var(--ultra-fast),
+        visibility var(--ultra-fast) !important;
+    will-change: opacity, transform;
+}
+
+.custom-dropdown.open .dropdown-options {
+    transition-duration: var(--ultra-fast) !important;
+}
+
+/* Instant modal animations */
+.modal {
+    transition:
+        opacity var(--lightning-fast),
+        visibility var(--lightning-fast) !important;
+}
+
+.modal.show {
+    transition-duration: var(--ultra-fast) !important;
+}
+
+.modal-content {
+    transition:
+        transform var(--ultra-fast),
+        opacity var(--ultra-fast) !important;
+    will-change: transform, opacity;
+}
+
+/* Optimized loading animations */
+.loading-spinner {
+    animation: spin 0.6s linear infinite !important;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg) var(--gpu-acceleration); }
+    to { transform: rotate(360deg) var(--gpu-acceleration); }
+}
+
+/* Fast fade animations */
+@keyframes fastFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) var(--gpu-acceleration);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) var(--gpu-acceleration);
+    }
+}
+
+@keyframes fastFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) var(--gpu-acceleration);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) var(--gpu-acceleration);
+    }
+}
+
+@keyframes fastSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px) var(--gpu-acceleration);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) var(--gpu-acceleration);
+    }
+}
+
+/* Ultra-fast scroll reveal */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(15px) var(--gpu-acceleration);
+    transition: all var(--quick) !important;
+    will-change: opacity, transform;
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0) var(--gpu-acceleration);
+}
+
+/* Staggered animation delays - faster */
+.scroll-reveal.delay-1 { transition-delay: 30ms !important; }
+.scroll-reveal.delay-2 { transition-delay: 60ms !important; }
+.scroll-reveal.delay-3 { transition-delay: 90ms !important; }
+.scroll-reveal.delay-4 { transition-delay: 120ms !important; }
+
+/* Fast ripple effect */
+@keyframes fastRipple {
+    0% {
+        transform: scale(0) var(--gpu-acceleration);
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(2.5) var(--gpu-acceleration);
+        opacity: 0;
+    }
+}
+
+.ripple-effect {
+    animation: fastRipple 0.3s ease-out !important;
+}
+
+/* Quick hover effects */
+.quick-hover {
+    transition: all var(--ultra-fast) !important;
+    will-change: transform, box-shadow;
+}
+
+.quick-hover:hover {
+    transform: translateY(-2px) var(--gpu-acceleration);
+}
+
+/* Instant focus effects */
+input:focus,
+textarea:focus,
+select:focus {
+    transition:
+        border-color var(--ultra-fast),
+        box-shadow var(--ultra-fast) !important;
+}
+
+/* Fast navbar transitions */
+.navbar {
+    transition:
+        background-color var(--ultra-fast),
+        transform var(--lightning-fast),
+        box-shadow var(--ultra-fast) !important;
+}
+
+.navbar.scrolled {
+    transition-duration: var(--ultra-fast) !important;
+}
+
+/* Quick tab switching */
+.region-tab {
+    transition: all var(--ultra-fast) !important;
+    will-change: background-color, color, transform;
+}
+
+.region-tab:hover {
+    transform: translateY(-1px) var(--gpu-acceleration);
+}
+
+.region-tab.active {
+    transition-duration: var(--ultra-fast) !important;
+}
+
+/* Adventure group fast transitions */
+.adventure-group {
+    transition:
+        opacity var(--lightning-fast),
+        transform var(--lightning-fast) !important;
+    will-change: opacity, transform;
+}
+
+.adventure-group.active {
+    transition-duration: var(--ultra-fast) !important;
+}
+
+/* Fast notification animations */
+.notification {
+    animation: fastSlideIn var(--lightning-fast) ease-out;
+}
+
+.notification.hiding {
+    animation: fastFadeOut var(--ultra-fast) ease-in forwards;
+}
+
+@keyframes fastFadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(100%) var(--gpu-acceleration);
+    }
+}
+
+/* Quick form animations */
+.form-group {
+    transition: all var(--ultra-fast) !important;
+}
+
+.form-error {
+    animation: fastShake 0.3s ease-in-out;
+}
+
+@keyframes fastShake {
+    0%, 100% { transform: translateX(0) var(--gpu-acceleration); }
+    25% { transform: translateX(-5px) var(--gpu-acceleration); }
+    75% { transform: translateX(5px) var(--gpu-acceleration); }
+}
+
+/* Optimized mobile animations */
+@media (max-width: 768px) {
+    /* Even faster on mobile for better performance */
+    .btn,
+    .adventure-card,
+    .modal,
+    .dropdown-options {
+        transition-duration: var(--ultra-fast) !important;
+    }
+
+    /* Reduce motion on mobile for battery life */
+    .adventure-card:hover {
+        transform: none !important;
+    }
+
+    .btn:hover {
+        transform: none !important;
+    }
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Performance optimization classes */
+.instant {
+    transition-duration: 50ms !important;
+}
+
+.lightning {
+    transition-duration: var(--ultra-fast) !important;
+}
+
+.quick {
+    transition-duration: var(--lightning-fast) !important;
+}
+
+.smooth {
+    transition-duration: var(--quick) !important;
+}
+
+/* GPU-accelerated transforms */
+.gpu-boost {
+    transform: var(--gpu-acceleration);
+    will-change: transform;
+}
+
+/* Optimized loading states */
+.fast-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.fast-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: fastShimmer 1s infinite;
+}
+
+@keyframes fastShimmer {
+    to {
+        left: 100%;
+    }
+}
+
+/* Optimized scroll behavior */
+.smooth-scroll {
+    scroll-behavior: smooth;
+}
+
+/* Fast tooltip animations */
+.tooltip {
+    transition:
+        opacity var(--ultra-fast),
+        visibility var(--ultra-fast),
+        transform var(--ultra-fast) !important;
+}
+
+/* Quick page transitions */
+.page-transition {
+    transition:
+        opacity var(--lightning-fast),
+        transform var(--lightning-fast) !important;
+    will-change: opacity, transform;
+}
+
+/* Optimized image loading */
+img {
+    transition: opacity var(--lightning-fast) !important;
+}
+
+img[data-loaded="true"] {
+    opacity: 1;
+}
+
+img[data-loaded="false"] {
+    opacity: 0;
+}
+
+/* Fast progress animations */
+.progress-bar {
+    transition: width var(--lightning-fast) ease-out !important;
+}
+
+/* Quick search animations */
+.search-results {
+    animation: fastFadeInUp var(--lightning-fast) ease-out;
+}
+
+/* Performance monitoring */
+.perf-overlay {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    z-index: 10000;
+    display: none;
+}
+
+.perf-overlay.show {
+    display: block;
+}
+
+/* Critical rendering path optimization */
+.above-fold {
+    contain: layout style paint;
+}
+
+.below-fold {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 400px;
+}
+
+/* Lazy loading optimization */
+.lazy-load {
+    opacity: 0;
+    transition: opacity var(--lightning-fast) !important;
+}
+
+.lazy-load.loaded {
+    opacity: 1;
+}

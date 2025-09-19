@@ -1,0 +1,347 @@
+/* Guides & Porters Page Styles */
+
+.guides-hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%232c3e50" width="1200" height="400"/><path fill="%2334495e" d="M0 200L50 225L100 200L150 175L200 200L250 225L300 200L350 175L400 200L450 225L500 200L550 175L600 200L650 225L700 200L750 175L800 200L850 225L900 200L950 175L1000 200L1050 225L1100 200L1150 175L1200 200V400H0V200Z"/></svg>');
+    background-size: cover;
+    background-position: center;
+    padding: 6rem 0 4rem;
+    margin-top: 70px;
+    color: var(--white);
+    text-align: center;
+}
+
+.guides-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.guides-hero p {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.selected-adventures {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.adventure-tag {
+    background: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+/* Main Layout */
+.guides-main {
+    padding: 3rem 0;
+    background: var(--bg-light);
+}
+
+.guides-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+}
+
+/* Filters Sidebar */
+.filters-sidebar {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    height: fit-content;
+    position: sticky;
+    top: 90px;
+}
+
+.filters-sidebar h3 {
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+}
+
+.filter-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.filter-section:last-child {
+    border-bottom: none;
+}
+
+.filter-section h4 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+}
+
+.checkbox-label, .radio-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+
+.checkbox-label input, .radio-label input {
+    margin-right: 0.5rem;
+}
+
+.checkbox-label:hover, .radio-label:hover {
+    color: var(--primary-color);
+}
+
+/* Results Section */
+.guides-results {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.results-header h2 {
+    color: var(--secondary-color);
+}
+
+.sort-options {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sort-options label {
+    font-weight: 500;
+}
+
+.sort-options select {
+    padding: 0.5rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+/* Guides Grid */
+.guides-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.guide-card {
+    background: var(--white);
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.guide-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+
+.guide-header {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    gap: 1rem;
+    background: var(--bg-light);
+}
+
+.guide-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 2rem;
+}
+
+.guide-avatar.porter {
+    background: var(--accent-color);
+}
+
+.guide-info h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+    color: var(--secondary-color);
+}
+
+.guide-type {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.guide-type.porter {
+    background: var(--accent-color);
+}
+
+.guide-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.guide-rating .stars {
+    color: #ffc107;
+    font-size: 1rem;
+}
+
+.guide-details {
+    padding: 1.5rem;
+}
+
+.guide-details p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.guide-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.spec-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.spec-item i {
+    color: var(--primary-color);
+}
+
+.guide-languages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.language-tag {
+    padding: 0.25rem 0.75rem;
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.guide-footer {
+    padding: 1rem 1.5rem;
+    background: var(--bg-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e0e0e0;
+}
+
+.guide-price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.btn-book {
+    padding: 0.5rem 1.5rem;
+    background: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.btn-book:hover {
+    background: #1a252f;
+    transform: translateY(-2px);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.page-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e0e0e0;
+    background: var(--white);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.page-btn:hover {
+    background: var(--bg-light);
+}
+
+.page-btn.active {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .guides-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .filters-sidebar {
+        position: relative;
+        top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .guides-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .guides-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .results-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .guide-footer {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .guide-price {
+        font-size: 1.2rem;
+    }
+}

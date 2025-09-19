@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Adventures - Nepal Adventures</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/explore.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <i class="fas fa-mountain"></i>
+                    <span>Nepal Adventures</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="adventures.html">Adventures</a></li>
+                    <li><a href="guides.html">Guides & Porters</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="login.html" class="btn-login">Login</a></li>
+                    <li><a href="register.html" class="btn-register">Register</a></li>
+                    <li><a href="dashboard.html" class="btn-admin" style="background: #17a2b8; color: white; padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.8rem;">⚙️ Admin</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Country Header -->
+    <section class="country-hero">
+        <div class="country-hero-content">
+            <div class="country-info">
+                <span class="country-flag" id="countryFlag">🇳🇵</span>
+                <h1 class="country-name" id="countryName">Nepal</h1>
+                <p class="country-description" id="countryDescription">
+                    Discover the magical Himalayas and rich cultural heritage
+                </p>
+            </div>
+            <div class="country-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="adventureCount">0</span>
+                    <span class="stat-label">Adventures</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="guideCount">0</span>
+                    <span class="stat-label">Expert Guides</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="regionCount">0</span>
+                    <span class="stat-label">Regions</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Country Selection -->
+    <section class="country-selector-section">
+        <div class="container">
+            <div class="country-switcher">
+                <span>Explore another country:</span>
+                <select id="countrySwitcher">
+                    <option value="nepal">🇳🇵 Nepal</option>
+                    <option value="india">🇮🇳 India</option>
+                    <option value="china">🇨🇳 China</option>
+                    <option value="japan">🇯🇵 Japan</option>
+                    <option value="south-korea">🇰🇷 South Korea</option>
+                    <option value="thailand">🇹🇭 Thailand</option>
+                    <option value="vietnam">🇻🇳 Vietnam</option>
+                    <option value="indonesia">🇮🇩 Indonesia</option>
+                    <option value="philippines">🇵🇭 Philippines</option>
+                    <option value="bhutan">🇧🇹 Bhutan</option>
+                    <option value="pakistan">🇵🇰 Pakistan</option>
+                    <option value="mongolia">🇲🇳 Mongolia</option>
+                    <option value="uae">🇦🇪 UAE</option>
+                    <option value="saudi-arabia">🇸🇦 Saudi Arabia</option>
+                    <option value="iran">🇮🇷 Iran</option>
+                    <option value="israel">🇮🇱 Israel</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Adventures Section -->
+    <section class="adventures-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Available Adventures</h2>
+                <div class="filters">
+                    <select id="typeFilter">
+                        <option value="">All Types</option>
+                        <option value="trekking">Trekking</option>
+                        <option value="climbing">Climbing</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="wildlife">Wildlife</option>
+                    </select>
+                    <select id="difficultyFilter">
+                        <option value="">All Difficulties</option>
+                        <option value="easy">Easy</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="challenging">Challenging</option>
+                        <option value="extreme">Extreme</option>
+                    </select>
+                </div>
+            </div>
+            <div class="adventures-grid" id="adventuresGrid">
+                <div class="loading">Loading adventures...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guides Section -->
+    <section class="guides-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Expert Guides & Porters</h2>
+                <div class="guide-tabs">
+                    <button class="tab-btn active" data-tab="guides">Guides</button>
+                    <button class="tab-btn" data-tab="porters">Porters</button>
+                </div>
+            </div>
+            <div class="guides-container">
+                <div class="guides-grid" id="guidesGrid">
+                    <div class="loading">Loading guides...</div>
+                </div>
+                <div class="porters-grid" id="portersGrid" style="display: none;">
+                    <div class="loading">Loading porters...</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your Adventure?</h2>
+                <p>Join thousands of adventurers who have explored the amazing destinations with our expert guides</p>
+                <div class="cta-buttons">
+                    <a href="register.html" class="btn-primary">Start Planning</a>
+                    <a href="#" class="btn-secondary" onclick="scrollToAdventures()">Browse Adventures</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-mountain"></i>
+                        <span>Nepal Adventures</span>
+                    </div>
+                    <p>Your gateway to Himalayan expeditions and cultural experiences.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="adventures.html">Adventures</a></li>
+                        <li><a href="guides.html">Guides</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@nepaladventures.com</p>
+                    <p><i class="fas fa-phone"></i> +977-1234567890</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/api.js"></script>
+    <script src="../js/explore.js"></script>
+    <script src="../js/enhancements.js"></script>
+</body>
+</html>

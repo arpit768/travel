@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Adventures Dashboard - Incredible India</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* India-specific styling */
+        :root {
+            --current-primary: #FF9933;
+            --current-secondary: #138808;
+            --current-accent: #000080;
+            --current-bg: linear-gradient(135deg, #FF9933 0%, #138808 50%, #000080 100%);
+            --current-card-shadow: 0 10px 30px rgba(255, 153, 51, 0.3);
+        }
+
+        body {
+            background: var(--current-bg);
+        }
+
+        .india-special {
+            background: linear-gradient(45deg, #FF9933, #FFFFFF, #138808);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s infinite;
+        }
+
+        .palace-animation {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .palace-animation::before {
+            content: '🏰';
+            position: absolute;
+            font-size: 2rem;
+            animation: float 4s ease-in-out infinite;
+            top: -10px;
+            right: -10px;
+            opacity: 0.3;
+        }
+
+        .tiger-pattern {
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(255, 153, 51, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(19, 136, 8, 0.1) 0%, transparent 50%);
+        }
+    </style>
+</head>
+<body class="country-india">
+    <div class="dashboard-container">
+        <!-- India-specific header -->
+        <header class="dashboard-header tiger-pattern">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-om"></i>
+                    <span class="india-special">Incredible India Adventures</span>
+                </div>
+                <div class="country-selector-header">
+                    <div class="current-country">
+                        <span class="country-flag">🇮🇳</span>
+                        <span class="country-name">India</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="country-dropdown" id="countryDropdown">
+                        <div class="country-option" onclick="window.location.href='dashboard.html'">
+                            <span class="flag">🌍</span>
+                            <span class="name">Main Dashboard</span>
+                            <span class="status available">Switch</span>
+                        </div>
+                        <div class="country-option active" data-country="india" data-flag="🇮🇳">
+                            <span class="flag">🇮🇳</span>
+                            <span class="name">India</span>
+                            <span class="status available">Current</span>
+                        </div>
+                        <div class="country-option" onclick="window.location.href='dashboard.html?country=nepal'">
+                            <span class="flag">🇳🇵</span>
+                            <span class="name">Nepal</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <div class="country-option" onclick="window.location.href='dashboard-bhutan.html'">
+                            <span class="flag">🇧🇹</span>
+                            <span class="name">Bhutan</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <div class="country-option" onclick="window.location.href='dashboard-tibet.html'">
+                            <span class="flag">🏔️</span>
+                            <span class="name">Tibet</span>
+                            <span class="status available">Available</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <span class="user-name">Namaste, Admin</span>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-main">
+            <!-- India-specific sidebar -->
+            <aside class="dashboard-sidebar palace-animation">
+                <nav class="dashboard-nav">
+                    <ul class="nav-menu">
+                        <li class="nav-item active">
+                            <a href="#overview" class="nav-link" data-section="overview">
+                                <i class="fas fa-chart-dashboard"></i>
+                                <span>Darshan (Overview)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#adventures" class="nav-link" data-section="adventures">
+                                <i class="fas fa-mountain"></i>
+                                <span>Yatras (Journeys)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#guides-porters" class="nav-link" data-section="guides-porters">
+                                <i class="fas fa-users"></i>
+                                <span>Guides & Saarthis</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#temples" class="nav-link" data-section="temples">
+                                <i class="fas fa-place-of-worship"></i>
+                                <span>Sacred Sites</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#festivals" class="nav-link" data-section="festivals">
+                                <i class="fas fa-calendar-star"></i>
+                                <span>Festivals</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#bookings" class="nav-link" data-section="bookings">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Bookings</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#analytics" class="nav-link" data-section="analytics">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Analytics</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="dashboard-content">
+                <!-- Overview Section -->
+                <section id="overview" class="content-section active">
+                    <div class="section-header">
+                        <h1 class="india-special">Incredible India Dashboard</h1>
+                        <p>🙏 Namaste! Welcome to your India adventures management hub</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card tiger-pattern">
+                            <div class="stat-icon">
+                                <i class="fas fa-gopuram"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalTemples">108</h3>
+                                <p>Sacred Temples</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+12%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card tiger-pattern">
+                            <div class="stat-icon">
+                                <i class="fas fa-train"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalJourneys">2500</h3>
+                                <p>Railway Journeys</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+18%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card tiger-pattern">
+                            <div class="stat-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalFestivals">365</h3>
+                                <p>Festivals Yearly</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+25%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card tiger-pattern">
+                            <div class="stat-icon">
+                                <i class="fas fa-rupee-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalRevenue">₹25,00,000</h3>
+                                <p>Total Revenue</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+30%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- India-specific widgets -->
+                    <div class="dashboard-widgets">
+                        <div class="widget">
+                            <div class="widget-header">
+                                <h3>🎭 Popular Festivals</h3>
+                                <button class="btn-secondary btn-sm">View All</button>
+                            </div>
+                            <div class="widget-content">
+                                <div class="festival-list">
+                                    <div class="festival-item">
+                                        <span class="festival-icon">🪔</span>
+                                        <div class="festival-info">
+                                            <h5>Diwali Festival Tours</h5>
+                                            <p>Experience the Festival of Lights</p>
+                                            <small>Oct 24 - Nov 12</small>
+                                        </div>
+                                        <span class="booking-count">450 bookings</span>
+                                    </div>
+                                    <div class="festival-item">
+                                        <span class="festival-icon">🎨</span>
+                                        <div class="festival-info">
+                                            <h5>Holi Color Festival</h5>
+                                            <p>Join the vibrant celebration</p>
+                                            <small>Mar 8 - Mar 9</small>
+                                        </div>
+                                        <span class="booking-count">380 bookings</span>
+                                    </div>
+                                    <div class="festival-item">
+                                        <span class="festival-icon">🐄</span>
+                                        <div class="festival-info">
+                                            <h5>Pushkar Camel Fair</h5>
+                                            <p>Desert festival experience</p>
+                                            <small>Nov 20 - Nov 28</small>
+                                        </div>
+                                        <span class="booking-count">275 bookings</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="widget">
+                            <div class="widget-header">
+                                <h3>🏛️ Heritage Circuits</h3>
+                                <button class="btn-secondary btn-sm">View All</button>
+                            </div>
+                            <div class="widget-content">
+                                <div class="heritage-list">
+                                    <div class="heritage-item">
+                                        <span class="heritage-icon">🕌</span>
+                                        <div class="heritage-info">
+                                            <h5>Golden Triangle</h5>
+                                            <p>Delhi - Agra - Jaipur</p>
+                                            <small>7 days / 6 nights</small>
+                                        </div>
+                                        <span class="heritage-price">₹45,000</span>
+                                    </div>
+                                    <div class="heritage-item">
+                                        <span class="heritage-icon">🏰</span>
+                                        <div class="heritage-info">
+                                            <h5>Rajasthan Palaces</h5>
+                                            <p>Royal heritage tour</p>
+                                            <small>10 days / 9 nights</small>
+                                        </div>
+                                        <span class="heritage-price">₹75,000</span>
+                                    </div>
+                                    <div class="heritage-item">
+                                        <span class="heritage-icon">🏛️</span>
+                                        <div class="heritage-info">
+                                            <h5>South India Temples</h5>
+                                            <p>Spiritual journey</p>
+                                            <small>12 days / 11 nights</small>
+                                        </div>
+                                        <span class="heritage-price">₹85,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Temples Section -->
+                <section id="temples" class="content-section">
+                    <div class="section-header">
+                        <h1>🏛️ Sacred Sites & Temples</h1>
+                        <button class="btn-primary">
+                            <i class="fas fa-plus"></i> Add Sacred Site
+                        </button>
+                    </div>
+                    <div class="temples-content">
+                        <div class="temples-grid">
+                            <!-- Temple cards will be loaded here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Festivals Section -->
+                <section id="festivals" class="content-section">
+                    <div class="section-header">
+                        <h1>🎭 Festivals & Cultural Events</h1>
+                        <button class="btn-primary">
+                            <i class="fas fa-plus"></i> Add Festival
+                        </button>
+                    </div>
+                    <div class="festivals-content">
+                        <div class="festivals-grid">
+                            <!-- Festival cards will be loaded here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Other sections (adventures, guides, bookings, analytics) remain similar to base dashboard -->
+            </main>
+        </div>
+    </div>
+
+    <!-- India-specific styles for festival and heritage items -->
+    <style>
+        .festival-item, .heritage-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+        }
+
+        .festival-item:hover, .heritage-item:hover {
+            background: rgba(255, 153, 51, 0.1);
+            transform: translateX(10px);
+        }
+
+        .festival-icon, .heritage-icon {
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .festival-info h5, .heritage-info h5 {
+            color: var(--current-primary);
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .booking-count, .heritage-price {
+            font-weight: 700;
+            color: var(--current-secondary);
+            font-size: 1.1rem;
+            margin-left: auto;
+        }
+
+        .temples-grid, .festivals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="../js/api.js"></script>
+    <script>
+        // India-specific dashboard initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            // Force India country setting
+            const dashboard = new DashboardManager();
+            dashboard.currentCountry = 'india';
+            dashboard.setupCountryTheming();
+
+            // Setup country selector dropdown
+            const currentCountry = document.querySelector('.current-country');
+            const dropdown = document.getElementById('countryDropdown');
+
+            currentCountry.addEventListener('click', () => {
+                dropdown.classList.toggle('show');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.country-selector-header')) {
+                    dropdown.classList.remove('show');
+                }
+            });
+
+            // India-specific greeting
+            setTimeout(() => {
+                dashboard.showNotification('🙏 Namaste! Welcome to Incredible India Adventures!', 'success');
+            }, 1000);
+
+            // Add special Indian animations
+            addIndianAnimations();
+        });
+
+        function addIndianAnimations() {
+            // Add sitar music visualization effect
+            const sitarNotes = ['🎵', '🎶', '♪', '♫'];
+            setInterval(() => {
+                if (Math.random() < 0.3) {
+                    createMusicalNote(sitarNotes[Math.floor(Math.random() * sitarNotes.length)]);
+                }
+            }, 3000);
+        }
+
+        function createMusicalNote(note) {
+            const musical = document.createElement('div');
+            musical.textContent = note;
+            musical.style.cssText = `
+                position: fixed;
+                font-size: 1.5rem;
+                color: var(--current-primary);
+                pointer-events: none;
+                z-index: 1000;
+                left: ${Math.random() * window.innerWidth}px;
+                top: ${window.innerHeight}px;
+                animation: floatUp 4s ease-out forwards;
+                opacity: 0.7;
+            `;
+            document.body.appendChild(musical);
+
+            setTimeout(() => {
+                musical.remove();
+            }, 4000);
+        }
+    </script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

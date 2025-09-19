@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Dashboards - Nepal Adventures</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Country Selection Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-mountain"></i>
+                    <span>Adventure Explorer</span>
+                </div>
+                <div class="destination-question">
+                    <h2><i class="fas fa-globe-asia"></i> Where would you like to visit?</h2>
+                    <p>Choose your dream destination for your next adventure</p>
+                </div>
+                <div class="country-selector-header">
+                    <div class="current-country">
+                        <span class="country-flag" id="currentFlag">🇳🇵</span>
+                        <span class="country-name" id="currentCountry">Nepal</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="country-dropdown" id="countryDropdown">
+                        <div class="country-option active" data-country="nepal" data-flag="🇳🇵">
+                            <span class="flag">🇳🇵</span>
+                            <div class="country-info">
+                                <span class="name">Nepal</span>
+                                <span class="description">Home of Everest & Himalayas</span>
+                            </div>
+                            <span class="status available">Available</span>
+                        </div>
+                        <div class="country-option" data-country="india" data-flag="🇮🇳">
+                            <span class="flag">🇮🇳</span>
+                            <div class="country-info">
+                                <span class="name">India</span>
+                                <span class="description">Incredible Diversity & Culture</span>
+                            </div>
+                            <span class="status available">Available</span>
+                        </div>
+                        <div class="country-option" data-country="bhutan" data-flag="🇧🇹">
+                            <span class="flag">🇧🇹</span>
+                            <div class="country-info">
+                                <span class="name">Bhutan</span>
+                                <span class="description">Last Shangri-La</span>
+                            </div>
+                            <span class="status available">Available</span>
+                        </div>
+                        <div class="country-option" data-country="tibet" data-flag="🏔️">
+                            <span class="flag">🏔️</span>
+                            <div class="country-info">
+                                <span class="name">Tibet</span>
+                                <span class="description">Roof of the World</span>
+                            </div>
+                            <span class="status available">Available</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <span class="user-name" id="userName">Admin</span>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-main">
+            <!-- Sidebar Navigation -->
+            <aside class="dashboard-sidebar">
+                <nav class="dashboard-nav">
+                    <ul class="nav-menu">
+                        <li class="nav-item active">
+                            <a href="#overview" class="nav-link" data-section="overview">
+                                <i class="fas fa-chart-dashboard"></i>
+                                <span>Overview</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#adventures" class="nav-link" data-section="adventures">
+                                <i class="fas fa-mountain"></i>
+                                <span>Adventures</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#guides-porters" class="nav-link" data-section="guides-porters">
+                                <i class="fas fa-users"></i>
+                                <span>Guides & Porters</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#bookings" class="nav-link" data-section="bookings">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Bookings</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#analytics" class="nav-link" data-section="analytics">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Analytics</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#settings" class="nav-link" data-section="settings">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="dashboard-content">
+                <!-- Overview Section -->
+                <section id="overview" class="content-section active">
+                    <div class="section-header">
+                        <h1>Dashboard Overview</h1>
+                        <p>Welcome to your country-specific adventure management dashboard</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalAdventures">0</h3>
+                                <p>Total Adventures</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+12%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalGuides">0</h3>
+                                <p>Active Guides</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+8%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalBookings">0</h3>
+                                <p>Total Bookings</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+24%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalRevenue">$0</h3>
+                                <p>Total Revenue</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+18%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-widgets">
+                        <div class="widget recent-bookings">
+                            <div class="widget-header">
+                                <h3>Recent Bookings</h3>
+                                <button class="btn-secondary btn-sm">View All</button>
+                            </div>
+                            <div class="widget-content">
+                                <div id="recentBookingsList">
+                                    <div class="loading">Loading recent bookings...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="widget popular-adventures">
+                            <div class="widget-header">
+                                <h3>Popular Adventures</h3>
+                                <button class="btn-secondary btn-sm">View All</button>
+                            </div>
+                            <div class="widget-content">
+                                <div id="popularAdventuresList">
+                                    <div class="loading">Loading popular adventures...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Adventures Section -->
+                <section id="adventures" class="content-section">
+                    <div class="section-header">
+                        <h1>Adventure Management</h1>
+                        <button class="btn-primary" id="addAdventureBtn">
+                            <i class="fas fa-plus"></i> Add New Adventure
+                        </button>
+                    </div>
+                    <div id="adventuresContent">
+                        <!-- Adventures management content will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Guides & Porters Section -->
+                <section id="guides-porters" class="content-section">
+                    <div class="section-header">
+                        <h1>Guides & Porters Management</h1>
+                        <div class="header-actions">
+                            <button class="btn-primary" id="addGuideBtn">
+                                <i class="fas fa-plus"></i> Add Guide
+                            </button>
+                            <button class="btn-secondary" id="addPorterBtn">
+                                <i class="fas fa-plus"></i> Add Porter
+                            </button>
+                        </div>
+                    </div>
+                    <div id="guidesPortersContent">
+                        <!-- Guides & Porters management content will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Bookings Section -->
+                <section id="bookings" class="content-section">
+                    <div class="section-header">
+                        <h1>Booking Management</h1>
+                        <div class="booking-filters">
+                            <select id="bookingStatusFilter">
+                                <option value="">All Statuses</option>
+                                <option value="pending">Pending</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                            <input type="date" id="bookingDateFilter">
+                            <button class="btn-secondary" id="exportBookingsBtn">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                    <div id="bookingsContent">
+                        <!-- Bookings management content will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Analytics Section -->
+                <section id="analytics" class="content-section">
+                    <div class="section-header">
+                        <h1>Analytics & Reports</h1>
+                        <div class="date-range-selector">
+                            <select id="analyticsTimeRange">
+                                <option value="7">Last 7 days</option>
+                                <option value="30" selected>Last 30 days</option>
+                                <option value="90">Last 3 months</option>
+                                <option value="365">Last year</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="analyticsContent">
+                        <div class="analytics-grid">
+                            <div class="chart-container">
+                                <h3>Booking Trends</h3>
+                                <canvas id="bookingTrendsChart"></canvas>
+                            </div>
+                            <div class="chart-container">
+                                <h3>Revenue Analysis</h3>
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="content-section">
+                    <div class="section-header">
+                        <h1>Dashboard Settings</h1>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <h3>Country Configuration</h3>
+                            <div class="setting-item">
+                                <label>Default Currency</label>
+                                <select id="defaultCurrency">
+                                    <option value="USD">USD ($)</option>
+                                    <option value="NPR" selected>NPR (₨)</option>
+                                    <option value="EUR">EUR (€)</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>Time Zone</label>
+                                <select id="timeZone">
+                                    <option value="Asia/Kathmandu" selected>Asia/Kathmandu</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Notification Preferences</h3>
+                            <div class="setting-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="emailNotifications" checked>
+                                    Email Notifications
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="smsNotifications">
+                                    SMS Notifications
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/api.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

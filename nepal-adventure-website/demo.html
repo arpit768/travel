@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Adventures - Professional Demo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .demo-banner {
+            background: var(--bg-gradient);
+            color: var(--white);
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .hero { margin-top: 120px; }
+        .demo-features {
+            background: var(--white);
+            padding: 3rem 0;
+            border-top: 4px solid var(--primary-color);
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .demo-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
+        }
+        .demo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        .demo-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .demo-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .status-complete { background: var(--success-color); color: white; }
+        .status-enhanced { background: var(--primary-color); color: white; }
+        .status-new { background: var(--secondary-color); color: white; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <i class="fas fa-mountain"></i>
+                    <span>Nepal Adventures</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#improvements">Improvements</a></li>
+                    <li><a href="pages/login.html" class="btn-login">Login</a></li>
+                    <li><a href="pages/register.html" class="btn-register">Register</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="demo-banner">
+        🌏 ASIA ADVENTURES PLATFORM - All Asian Countries with Professional Design ✨
+    </div>
+
+    <section class="hero parallax" id="home">
+        <div class="hero-content">
+            <h1>Asia Adventures Platform</h1>
+            <p>Comprehensive travel platform covering all Asian countries with modern design and professional features</p>
+            <div class="country-selector">
+                <div class="select-wrapper">
+                    <i class="fas fa-globe-asia"></i>
+                    <select id="countrySelect">
+                        <option value="nepal" selected>🇳🇵 Nepal</option>
+                        <option value="india">🇮🇳 India</option>
+                        <option value="bhutan" disabled>🇧🇹 Bhutan (Coming Soon)</option>
+                        <option value="tibet" disabled>🏔️ Tibet (Coming Soon)</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="selectCountry()">
+                    Experience the Demo
+                </button>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <i class="fas fa-palette"></i>
+                <h3>100%</h3>
+                <p>Modern Design</p>
+            </div>
+            <div class="stat">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>100%</h3>
+                <p>Responsive</p>
+            </div>
+            <div class="stat">
+                <i class="fas fa-rocket"></i>
+                <h3>100%</h3>
+                <p>Performance</p>
+            </div>
+            <div class="stat">
+                <i class="fas fa-star"></i>
+                <h3>A+</h3>
+                <p>Professional</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo-features" id="improvements">
+        <div class="container">
+            <h2>🚀 Professional Enhancements Completed</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3><i class="fas fa-paint-brush"></i> Modern Design System</h3>
+                    <span class="demo-status status-complete">✅ Complete</span>
+                    <p>• Professional color scheme with Nepal-inspired greens and golds<br>
+                    • Modern CSS variables and design tokens<br>
+                    • Enhanced typography with Poppins font<br>
+                    • Consistent spacing and border radius</p>
+                </div>
+
+                <div class="demo-card">
+                    <h3><i class="fas fa-magic"></i> Advanced Animations</h3>
+                    <span class="demo-status status-enhanced">✨ Enhanced</span>
+                    <p>• Smooth scroll animations and fade-in effects<br>
+                    • Parallax hero background<br>
+                    • Hover effects on cards and buttons<br>
+                    • Custom loading spinners and transitions</p>
+                </div>
+
+                <div class="demo-card">
+                    <h3><i class="fas fa-mobile-alt"></i> Mobile Experience</h3>
+                    <span class="demo-status status-complete">✅ Complete</span>
+                    <p>• Full mobile navigation with hamburger menu<br>
+                    • Responsive grid layouts<br>
+                    • Touch-friendly buttons and interactions<br>
+                    • Optimized for all screen sizes</p>
+                </div>
+
+                <div class="demo-card">
+                    <h3><i class="fas fa-search"></i> SEO & Performance</h3>
+                    <span class="demo-status status-new">🆕 New</span>
+                    <p>• Complete meta tags and Open Graph<br>
+                    • Structured data markup<br>
+                    • Preconnect to external resources<br>
+                    • Accessibility improvements</p>
+                </div>
+
+                <div class="demo-card">
+                    <h3><i class="fas fa-bell"></i> Notification System</h3>
+                    <span class="demo-status status-new">🆕 New</span>
+                    <p>• Custom toast notifications<br>
+                    • Loading states for forms<br>
+                    • Error handling and feedback<br>
+                    • Success/warning/info alerts</p>
+                </div>
+
+                <div class="demo-card">
+                    <h3><i class="fas fa-code"></i> Clean Code Structure</h3>
+                    <span class="demo-status status-enhanced">✨ Enhanced</span>
+                    <p>• Modular JavaScript architecture<br>
+                    • API integration layer<br>
+                    • Professional error handling<br>
+                    • Maintainable CSS with variables</p>
+                </div>
+
+                <div class="demo-card">
+                    <h3><i class="fas fa-shield-alt"></i> Backend Integration</h3>
+                    <span class="demo-status status-complete">✅ Ready</span>
+                    <p>• Complete API client setup<br>
+                    • Authentication flow ready<br>
+                    • Form validation and submission<br>
+                    • Token management</p>
+                </div>
+
+                <div class="demo-card">
+                    <h3><i class="fas fa-image"></i> Visual Enhancements</h3>
+                    <span class="demo-status status-enhanced">✨ Enhanced</span>
+                    <p>• High-quality Unsplash images<br>
+                    • Glass morphism effects<br>
+                    • Gradient backgrounds<br>
+                    • Professional icon usage</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="adventures-preview" id="features">
+        <div class="container">
+            <h2>✨ Enhanced Adventure Features</h2>
+            <div class="adventure-grid">
+                <div class="adventure-card" data-type="trekking">
+                    <div class="adventure-icon">
+                        <i class="fas fa-hiking"></i>
+                    </div>
+                    <h3>Enhanced Trekking</h3>
+                    <p>Beautiful animations and modern card design</p>
+                </div>
+                <div class="adventure-card" data-type="climbing">
+                    <div class="adventure-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3>Mountain Climbing</h3>
+                    <p>Interactive hover effects and smooth transitions</p>
+                </div>
+                <div class="adventure-card" data-type="biking">
+                    <div class="adventure-icon">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <h3>Motorbiking</h3>
+                    <p>Gradient icons and professional styling</p>
+                </div>
+                <div class="adventure-card" data-type="cycling">
+                    <div class="adventure-icon">
+                        <i class="fas fa-bicycle"></i>
+                    </div>
+                    <h3>Mountain Biking</h3>
+                    <p>Responsive design and mobile-optimized</p>
+                </div>
+                <div class="adventure-card" data-type="rafting">
+                    <div class="adventure-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3>Water Rafting</h3>
+                    <p>Modern card layouts with shadow effects</p>
+                </div>
+                <div class="adventure-card" data-type="paragliding">
+                    <div class="adventure-icon">
+                        <i class="fas fa-parachute-box"></i>
+                    </div>
+                    <h3>Paragliding</h3>
+                    <p>Professional animations and interactions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>🎉 Professional Website Complete!</h2>
+                <p>Your Nepal Adventures platform is now ready with modern design, animations, and professional features</p>
+                <div class="cta-buttons">
+                    <a href="index.html" class="btn-primary">View Full Website</a>
+                    <a href="pages/login.html" class="btn-secondary">Test Login Page</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Nepal Adventures</h3>
+                    <p>Professionally enhanced for your business success</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enhanced Features</h4>
+                    <ul>
+                        <li><a href="#features">Modern Design</a></li>
+                        <li><a href="#features">Animations</a></li>
+                        <li><a href="#features">Mobile Responsive</a></li>
+                        <li><a href="#features">SEO Optimized</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Technical</h4>
+                    <ul>
+                        <li><a href="#improvements">API Integration</a></li>
+                        <li><a href="#improvements">Clean Code</a></li>
+                        <li><a href="#improvements">Performance</a></li>
+                        <li><a href="#improvements">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Development Info</h4>
+                    <p><i class="fas fa-code"></i> Modern JavaScript ES6+</p>
+                    <p><i class="fas fa-paint-brush"></i> Advanced CSS3</p>
+                    <p><i class="fas fa-mobile-alt"></i> Fully Responsive</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nepal Adventures - Professionally Enhanced</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Guides & Porters - Nepal Adventures</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Find certified mountain guides and porters in Nepal - Expert local guides for Everest, Annapurna, and Himalayan adventures">
+    <meta name="keywords" content="Nepal guides, mountain guides, Sherpa guides, porters Nepal, Everest guides, hiking guides">
+    <meta name="author" content="Nepal Adventures">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Expert Guides & Porters - Nepal Adventures">
+    <meta property="og:description" content="Connect with certified mountain guides and porters for your Nepal adventure">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nepaladventures.com/guides">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/guides.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Beautiful guides page styling */
+        body {
+            background: linear-gradient(135deg,
+                rgba(41, 128, 185, 0.9) 0%,
+                rgba(52, 152, 219, 0.8) 50%,
+                rgba(26, 188, 156, 0.7) 100%),
+                url('https://images.unsplash.com/photo-1464822759844-d150a8f9e692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat fixed;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            font-family: var(--font-family);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            z-index: -2;
+            animation: guideParallax 35s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg,
+                rgba(41, 128, 185, 0.1) 0%,
+                rgba(52, 152, 219, 0.1) 25%,
+                rgba(26, 188, 156, 0.1) 50%,
+                rgba(22, 160, 133, 0.1) 75%,
+                rgba(39, 174, 96, 0.1) 100%);
+            z-index: -1;
+            animation: guideColorShift 25s ease-in-out infinite;
+        }
+
+        @keyframes guideParallax {
+            0%, 100% { transform: scale(1) translateX(0px); }
+            50% { transform: scale(1.08) translateX(-20px); }
+        }
+
+        @keyframes guideColorShift {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.1; }
+        }
+
+        /* Beautiful header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Enhanced guides hero */
+        .guides-hero {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 4rem 0;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .guides-hero::before {
+            content: '🗺️';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            top: 15%;
+            right: 8%;
+            animation: guideFloat 7s ease-in-out infinite;
+        }
+
+        .guides-hero::after {
+            content: '🧭';
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.1;
+            bottom: 15%;
+            left: 8%;
+            animation: guideFloat 9s ease-in-out infinite reverse;
+        }
+
+        @keyframes guideFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(10deg); }
+        }
+
+        /* Guide elements floating */
+        .guide-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .guide-element {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.08;
+            animation: floatGuide 18s ease-in-out infinite;
+        }
+
+        .guide-element:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+        .guide-element:nth-child(2) { top: 35%; right: 12%; animation-delay: 5s; }
+        .guide-element:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 10s; }
+        .guide-element:nth-child(4) { bottom: 15%; right: 8%; animation-delay: 15s; }
+        .guide-element:nth-child(5) { top: 65%; left: 45%; animation-delay: 3s; }
+        .guide-element:nth-child(6) { top: 25%; left: 75%; animation-delay: 8s; }
+        .guide-element:nth-child(7) { bottom: 45%; right: 35%; animation-delay: 13s; }
+
+        @keyframes floatGuide {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-50px) rotate(45deg) scale(1.3); }
+            50% { transform: translateY(-70px) rotate(90deg) scale(0.7); }
+            75% { transform: translateY(-40px) rotate(135deg) scale(1.1); }
+        }
+
+        /* Beautiful guide cards */
+        .guide-card {
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(41, 128, 185, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .guide-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(41, 128, 185, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .guide-card:hover::before {
+            left: 100%;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(41, 128, 185, 0.3);
+            border-color: #3498db;
+        }
+
+        /* Beautiful sections */
+        .guides-filters,
+        .guides-grid-container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            margin: 2rem 0;
+            border-radius: var(--border-radius-large);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Enhanced filter buttons */
+        .filter-btn {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(41, 128, 185, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(41, 128, 185, 0.1);
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: rgba(41, 128, 185, 0.2);
+            border-color: #3498db;
+            box-shadow: 0 0 20px rgba(41, 128, 185, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Guide elements floating -->
+    <div class="guide-elements">
+        <div class="guide-element">🗺️</div>
+        <div class="guide-element">🧭</div>
+        <div class="guide-element">⛰️</div>
+        <div class="guide-element">🎒</div>
+        <div class="guide-element">🏔️</div>
+        <div class="guide-element">🥾</div>
+        <div class="guide-element">🏕️</div>
+    </div>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="../index.html">
+                        <i class="fas fa-mountain"></i>
+                        <span>Nepal Adventures</span>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="adventures.html">Adventures</a></li>
+                    <li><a href="guides.html" class="active">Guides & Porters</a></li>
+                    <li><a href="gear.html">Gear Rental</a></li>
+                    <li><a href="login.html" class="btn-login">Login</a></li>
+                    <li><a href="register.html" class="btn-register">Register</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="guides-hero">
+        <div class="container">
+            <h1>Find Your Perfect Guide or Porter</h1>
+            <p>Connect with certified professionals for your adventure</p>
+            <div class="selected-adventures" id="selectedAdventures"></div>
+        </div>
+    </section>
+
+    <section class="guides-main">
+        <div class="container">
+            <div class="guides-layout">
+                <!-- Filters Sidebar -->
+                <aside class="filters-sidebar">
+                    <h3>Filter Results</h3>
+                    
+                    <div class="filter-section">
+                        <h4>Service Type</h4>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="type" value="guide" checked>
+                            <span>Adventure Guides</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="type" value="porter" checked>
+                            <span>Porters</span>
+                        </label>
+                    </div>
+
+                    <div class="filter-section">
+                        <h4>Specializations</h4>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="spec" value="trekking">
+                            <span>Trekking</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="spec" value="climbing">
+                            <span>Mountain Climbing</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="spec" value="cultural">
+                            <span>Cultural Tours</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="spec" value="wildlife">
+                            <span>Wildlife Tours</span>
+                        </label>
+                    </div>
+
+                    <div class="filter-section">
+                        <h4>Languages</h4>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="lang" value="english">
+                            <span>English</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="lang" value="chinese">
+                            <span>Chinese</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="lang" value="japanese">
+                            <span>Japanese</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="lang" value="french">
+                            <span>French</span>
+                        </label>
+                    </div>
+
+                    <div class="filter-section">
+                        <h4>Experience Level</h4>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="exp" value="5+">
+                            <span>5+ years</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="exp" value="10+">
+                            <span>10+ years</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="exp" value="expert">
+                            <span>Expert (15+ years)</span>
+                        </label>
+                    </div>
+
+                    <div class="filter-section">
+                        <h4>Price Range (per day)</h4>
+                        <label class="radio-label">
+                            <input type="radio" name="price" value="all" checked>
+                            <span>All prices</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="price" value="0-50">
+                            <span>$0 - $50</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="price" value="50-100">
+                            <span>$50 - $100</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="price" value="100+">
+                            <span>$100+</span>
+                        </label>
+                    </div>
+
+                    <button class="btn-primary btn-block" onclick="applyFilters()">Apply Filters</button>
+                    <button class="btn-secondary btn-block" onclick="clearFilters()">Clear All</button>
+                </aside>
+
+                <!-- Results Section -->
+                <div class="guides-results">
+                    <div class="results-header">
+                        <h2>Available Guides & Porters</h2>
+                        <div class="sort-options">
+                            <label>Sort by:</label>
+                            <select id="sortBy" onchange="sortResults()">
+                                <option value="rating">Highest Rated</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="experience">Most Experienced</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="guides-grid" id="guidesGrid">
+                        <!-- Guide Card 1 -->
+                        <div class="guide-card" data-type="guide">
+                            <div class="guide-header">
+                                <div class="guide-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="guide-info">
+                                    <h4>Pemba Sherpa</h4>
+                                    <span class="guide-type">Mountain Guide</span>
+                                    <div class="guide-rating">
+                                        <span class="stars">★★★★★</span>
+                                        <span>(127 reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="guide-details">
+                                <p>Expert mountain guide with 15+ years experience. Summited Everest 12 times. Specializes in high-altitude expeditions.</p>
+                                <div class="guide-specs">
+                                    <span class="spec-item"><i class="fas fa-mountain"></i> High Altitude</span>
+                                    <span class="spec-item"><i class="fas fa-clock"></i> 15 years</span>
+                                    <span class="spec-item"><i class="fas fa-certificate"></i> NMGA Certified</span>
+                                </div>
+                                <div class="guide-languages">
+                                    <span class="language-tag">English</span>
+                                    <span class="language-tag">Nepali</span>
+                                    <span class="language-tag">Hindi</span>
+                                </div>
+                            </div>
+                            <div class="guide-footer">
+                                <span class="guide-price">$120/day</span>
+                                <button class="btn-book" onclick="bookGuide('Pemba Sherpa')">View Profile</button>
+                            </div>
+                        </div>
+
+                        <!-- Guide Card 2 -->
+                        <div class="guide-card" data-type="guide">
+                            <div class="guide-header">
+                                <div class="guide-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="guide-info">
+                                    <h4>Maya Tamang</h4>
+                                    <span class="guide-type">Trekking Guide</span>
+                                    <div class="guide-rating">
+                                        <span class="stars">★★★★★</span>
+                                        <span>(89 reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="guide-details">
+                                <p>Specialized in Annapurna region treks. Excellent knowledge of local culture and wildlife. First aid certified.</p>
+                                <div class="guide-specs">
+                                    <span class="spec-item"><i class="fas fa-hiking"></i> Trekking</span>
+                                    <span class="spec-item"><i class="fas fa-clock"></i> 8 years</span>
+                                    <span class="spec-item"><i class="fas fa-female"></i> Female Guide</span>
+                                </div>
+                                <div class="guide-languages">
+                                    <span class="language-tag">English</span>
+                                    <span class="language-tag">French</span>
+                                    <span class="language-tag">Nepali</span>
+                                </div>
+                            </div>
+                            <div class="guide-footer">
+                                <span class="guide-price">$65/day</span>
+                                <button class="btn-book" onclick="bookGuide('Maya Tamang')">View Profile</button>
+                            </div>
+                        </div>
+
+                        <!-- Porter Card 1 -->
+                        <div class="guide-card" data-type="porter">
+                            <div class="guide-header">
+                                <div class="guide-avatar porter">
+                                    <i class="fas fa-hiking"></i>
+                                </div>
+                                <div class="guide-info">
+                                    <h4>Ram Bahadur</h4>
+                                    <span class="guide-type porter">Porter</span>
+                                    <div class="guide-rating">
+                                        <span class="stars">★★★★☆</span>
+                                        <span>(64 reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="guide-details">
+                                <p>Reliable porter with experience in Everest and Annapurna regions. Can carry up to 30kg. Strong and trustworthy.</p>
+                                <div class="guide-specs">
+                                    <span class="spec-item"><i class="fas fa-weight"></i> 30kg capacity</span>
+                                    <span class="spec-item"><i class="fas fa-clock"></i> 10 years</span>
+                                    <span class="spec-item"><i class="fas fa-mountain"></i> 5500m max</span>
+                                </div>
+                                <div class="guide-languages">
+                                    <span class="language-tag">Nepali</span>
+                                    <span class="language-tag">Basic English</span>
+                                </div>
+                            </div>
+                            <div class="guide-footer">
+                                <span class="guide-price">$25/day</span>
+                                <button class="btn-book" onclick="bookGuide('Ram Bahadur')">View Profile</button>
+                            </div>
+                        </div>
+
+                        <!-- Guide Card 3 -->
+                        <div class="guide-card" data-type="guide">
+                            <div class="guide-header">
+                                <div class="guide-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="guide-info">
+                                    <h4>Tenzing Norbu</h4>
+                                    <span class="guide-type">Cultural Guide</span>
+                                    <div class="guide-rating">
+                                        <span class="stars">★★★★★</span>
+                                        <span>(156 reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="guide-details">
+                                <p>Expert in Buddhist culture and monastery tours. Fluent in multiple languages. Specializes in spiritual journeys.</p>
+                                <div class="guide-specs">
+                                    <span class="spec-item"><i class="fas fa-pray"></i> Cultural Tours</span>
+                                    <span class="spec-item"><i class="fas fa-clock"></i> 12 years</span>
+                                    <span class="spec-item"><i class="fas fa-language"></i> 5 languages</span>
+                                </div>
+                                <div class="guide-languages">
+                                    <span class="language-tag">English</span>
+                                    <span class="language-tag">Chinese</span>
+                                    <span class="language-tag">Japanese</span>
+                                    <span class="language-tag">Tibetan</span>
+                                </div>
+                            </div>
+                            <div class="guide-footer">
+                                <span class="guide-price">$80/day</span>
+                                <button class="btn-book" onclick="bookGuide('Tenzing Norbu')">View Profile</button>
+                            </div>
+                        </div>
+
+                        <!-- Porter Card 2 -->
+                        <div class="guide-card" data-type="porter">
+                            <div class="guide-header">
+                                <div class="guide-avatar porter">
+                                    <i class="fas fa-hiking"></i>
+                                </div>
+                                <div class="guide-info">
+                                    <h4>Dawa Lama</h4>
+                                    <span class="guide-type porter">High Altitude Porter</span>
+                                    <div class="guide-rating">
+                                        <span class="stars">★★★★★</span>
+                                        <span>(98 reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="guide-details">
+                                <p>Experienced high-altitude porter. Has worked on Everest expeditions. Strong, reliable, and altitude acclimatized.</p>
+                                <div class="guide-specs">
+                                    <span class="spec-item"><i class="fas fa-weight"></i> 25kg capacity</span>
+                                    <span class="spec-item"><i class="fas fa-clock"></i> 15 years</span>
+                                    <span class="spec-item"><i class="fas fa-mountain"></i> 6500m max</span>
+                                </div>
+                                <div class="guide-languages">
+                                    <span class="language-tag">Nepali</span>
+                                    <span class="language-tag">Sherpa</span>
+                                    <span class="language-tag">Basic English</span>
+                                </div>
+                            </div>
+                            <div class="guide-footer">
+                                <span class="guide-price">$35/day</span>
+                                <button class="btn-book" onclick="bookGuide('Dawa Lama')">View Profile</button>
+                            </div>
+                        </div>
+
+                        <!-- Guide Card 4 -->
+                        <div class="guide-card" data-type="guide">
+                            <div class="guide-header">
+                                <div class="guide-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="guide-info">
+                                    <h4>Suresh Rai</h4>
+                                    <span class="guide-type">Wildlife Guide</span>
+                                    <div class="guide-rating">
+                                        <span class="stars">★★★★☆</span>
+                                        <span>(73 reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="guide-details">
+                                <p>Wildlife expert specializing in Chitwan and Bardia National Parks. Excellent bird watching and animal tracking skills.</p>
+                                <div class="guide-specs">
+                                    <span class="spec-item"><i class="fas fa-binoculars"></i> Wildlife</span>
+                                    <span class="spec-item"><i class="fas fa-clock"></i> 9 years</span>
+                                    <span class="spec-item"><i class="fas fa-camera"></i> Photography</span>
+                                </div>
+                                <div class="guide-languages">
+                                    <span class="language-tag">English</span>
+                                    <span class="language-tag">Hindi</span>
+                                    <span class="language-tag">Nepali</span>
+                                </div>
+                            </div>
+                            <div class="guide-footer">
+                                <span class="guide-price">$55/day</span>
+                                <button class="btn-book" onclick="bookGuide('Suresh Rai')">View Profile</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pagination">
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Nepal Adventures</h3>
+                    <p>Your trusted partner for Himalayan expeditions</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="adventures.html">Adventures</a></li>
+                        <li><a href="guides.html">Find Guides</a></li>
+                        <li><a href="gear.html">Rent Gear</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-envelope"></i> info@nepaladventures.com</p>
+                    <p><i class="fas fa-phone"></i> +977 1234567890</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/guides.js"></script>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Nepal Adventures</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Your personal Nepal Adventures dashboard - manage bookings, view adventures, and plan your journey">
+    <meta name="keywords" content="dashboard, nepal, adventures, bookings, trekking, climbing">
+    <meta name="author" content="Nepal Adventures">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Dashboard - Nepal Adventures">
+    <meta property="og:description" content="Your personal adventure dashboard">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1544735716-392fe2489ffa">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/enhancements.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg,
+                rgba(44, 85, 48, 0.9) 0%,
+                rgba(34, 139, 34, 0.8) 50%,
+                rgba(0, 100, 0, 0.7) 100%),
+                url('https://images.unsplash.com/photo-1544735716-392fe2489ffa') center/cover no-repeat fixed;
+            min-height: 100vh;
+            font-family: var(--font-family);
+        }
+
+        .dashboard-container {
+            backdrop-filter: blur(20px);
+            padding: 2rem 0;
+            min-height: 100vh;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border-radius: var(--border-radius-large);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            animation: floatIn 1s ease-out;
+        }
+
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .welcome-section h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-card {
+            background: rgba(44, 85, 48, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(44, 85, 48, 0.2);
+        }
+
+        .info-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, var(--primary-color), #27ae60);
+            color: white;
+            text-decoration: none;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-weight: 600;
+            box-shadow: var(--shadow-medium);
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-large);
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .recent-activity {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+        }
+
+        .recent-activity h3 {
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-brand">
+                    <img src="images/logo.png" alt="Nepal Adventures" onerror="this.style.display='none'">
+                    <span class="brand-text">Nepal Adventures</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="pages/adventures.html">Adventures</a></li>
+                    <li><a href="pages/guides.html">Guides</a></li>
+                    <li><button class="logout-btn" onclick="handleLogout()">Logout</button></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="dashboard-card">
+            <div class="welcome-section">
+                <h1>🏔️ Welcome to Your Adventure Dashboard</h1>
+                <p id="welcome-message">Loading your adventure profile...</p>
+
+                <!-- Country Explorer Section -->
+                <div class="country-explorer" style="margin: 2rem 0;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🌍 Explore Adventures by Country</h3>
+                    <div class="country-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div class="country-card" data-country="nepal" style="background: linear-gradient(135deg, rgba(44, 85, 48, 0.1), rgba(34, 139, 34, 0.1)); border: 2px solid rgba(44, 85, 48, 0.3); border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: all 0.3s ease; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏔️</div>
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Nepal</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Everest, Annapurna, Langtang</p>
+                            <div id="nepal-stats" class="country-stats">Loading...</div>
+                        </div>
+
+                        <div class="country-card" data-country="india" style="background: linear-gradient(135deg, rgba(255, 153, 51, 0.1), rgba(255, 102, 0, 0.1)); border: 2px solid rgba(255, 153, 51, 0.3); border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: all 0.3s ease; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🕌</div>
+                            <h4 style="color: #ff9933; margin-bottom: 0.5rem;">India</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Kashmir, Himachal, Ladakh</p>
+                            <div id="india-stats" class="country-stats">Loading...</div>
+                        </div>
+
+                        <div class="country-card" data-country="tibet" style="background: linear-gradient(135deg, rgba(220, 20, 60, 0.1), rgba(178, 34, 34, 0.1)); border: 2px solid rgba(220, 20, 60, 0.3); border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: all 0.3s ease; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏮</div>
+                            <h4 style="color: #dc143c; margin-bottom: 0.5rem;">Tibet</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Everest North, Lhasa</p>
+                            <div id="tibet-stats" class="country-stats">Loading...</div>
+                        </div>
+
+                        <div class="country-card" data-country="bhutan" style="background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.1)); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: all 0.3s ease; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏯</div>
+                            <h4 style="color: #ffd700; margin-bottom: 0.5rem;">Bhutan</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Thunder Dragon Kingdom</p>
+                            <div id="bhutan-stats" class="country-stats">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-info">
+                <div class="info-card">
+                    <h3>📍 Your Profile</h3>
+                    <div id="user-details">
+                        <p><strong>Name:</strong> <span id="user-name">Loading...</span></p>
+                        <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
+                        <p><strong>Role:</strong> <span id="user-role">Loading...</span></p>
+                        <p><strong>Location:</strong> <span id="user-location">Loading...</span></p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>📈 Adventure Stats</h3>
+                    <div id="adventure-stats">
+                        <p><strong>Adventures Completed:</strong> <span>0</span></p>
+                        <p><strong>Countries Visited:</strong> <span>0</span></p>
+                        <p><strong>Total Elevation Gained:</strong> <span>0m</span></p>
+                        <p><strong>Member Since:</strong> <span id="member-since">Loading...</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <a href="pages/adventures.html" class="action-btn">
+                    🏔️ Browse Adventures
+                </a>
+                <a href="pages/guides.html" class="action-btn">
+                    🗺️ Find Guides
+                </a>
+                <a href="#" class="action-btn" onclick="alert('🏕️ Booking system coming soon!')">
+                    📝 My Bookings
+                </a>
+                <a href="#" class="action-btn" onclick="alert('👤 Profile editor coming soon!')">
+                    👤 Edit Profile
+                </a>
+            </div>
+
+            <div class="recent-activity">
+                <h3>📊 Recent Activity</h3>
+                <div id="activity-list">
+                    <p>🎉 Welcome to Nepal Adventures! Start exploring amazing adventures.</p>
+                    <p>🏔️ Complete your profile to get personalized recommendations.</p>
+                    <p>🗺️ Browse our collection of adventures from Nepal, India, Tibet, and more!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/enhancements.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            if (!window.API.utils.isLoggedIn()) {
+                window.location.href = 'pages/login.html';
+                return;
+            }
+
+            // Load user data
+            loadUserData();
+
+            // Load country statistics
+            loadCountryStats();
+
+            // Add country card click handlers
+            setupCountryCards();
+        });
+
+        function loadUserData() {
+            const user = window.API.utils.getUser();
+
+            if (user) {
+                // Update welcome message
+                document.getElementById('welcome-message').textContent = `Ready for your next adventure, ${user.fullName}?`;
+
+                // Update user details
+                document.getElementById('user-name').textContent = user.fullName;
+                document.getElementById('user-email').textContent = user.email;
+                document.getElementById('user-role').textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
+
+                // Update location
+                const location = user.address ?
+                    `${user.address.city || ''}, ${user.address.country || ''}`.replace(/^,\s*/, '') :
+                    'Not specified';
+                document.getElementById('user-location').textContent = location;
+
+                // Update member since
+                const memberSince = new Date(user.createdAt).toLocaleDateString();
+                document.getElementById('member-since').textContent = memberSince;
+            }
+        }
+
+        function handleLogout() {
+            if (confirm('🏔️ Are you sure you want to end your adventure session?')) {
+                window.API.utils.logout();
+            }
+        }
+
+        // Load country statistics
+        async function loadCountryStats() {
+            const countries = ['nepal', 'india', 'tibet', 'bhutan'];
+
+            for (const country of countries) {
+                try {
+                    const response = await window.API.adventures.getAll({ country });
+                    const adventures = response.data || [];
+
+                    const statsElement = document.getElementById(`${country}-stats`);
+                    if (statsElement) {
+                        const totalAdventures = adventures.length;
+                        const avgPrice = adventures.length > 0
+                            ? Math.round(adventures.reduce((sum, adv) => sum + adv.pricing.basePrice, 0) / adventures.length)
+                            : 0;
+
+                        statsElement.innerHTML = `
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">
+                                <div><strong>${totalAdventures}</strong> Adventures</div>
+                                <div>From <strong>$${avgPrice}</strong></div>
+                            </div>
+                        `;
+                    }
+                } catch (error) {
+                    console.error(`Error loading stats for ${country}:`, error);
+                    const statsElement = document.getElementById(`${country}-stats`);
+                    if (statsElement) {
+                        statsElement.innerHTML = `<div style="font-size: 0.8rem; color: var(--text-muted);">Coming Soon</div>`;
+                    }
+                }
+            }
+        }
+
+        // Setup country card interactions
+        function setupCountryCards() {
+            document.querySelectorAll('.country-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.05)';
+                    this.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = 'none';
+                });
+
+                card.addEventListener('click', function() {
+                    const country = this.dataset.country;
+                    openCountryDashboard(country);
+                });
+            });
+        }
+
+        // Open country-specific dashboard
+        function openCountryDashboard(country) {
+            // Create country dashboard page URL
+            const countryPages = {
+                nepal: 'dashboards/nepal.html',
+                india: 'dashboards/india.html',
+                tibet: 'dashboards/tibet.html',
+                bhutan: 'dashboards/bhutan.html'
+            };
+
+            const countryEmojis = {
+                nepal: '🏔️',
+                india: '🕌',
+                tibet: '🏮',
+                bhutan: '🏯'
+            };
+
+            const countryNames = {
+                nepal: 'Nepal',
+                india: 'India',
+                tibet: 'Tibet',
+                bhutan: 'Bhutan'
+            };
+
+            // Show loading animation
+            const card = document.querySelector(`[data-country="${country}"]`);
+            const originalContent = card.innerHTML;
+            card.innerHTML = `
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⏳</div>
+                <h4>Loading ${countryNames[country]}...</h4>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Preparing your adventure dashboard...</p>
+            `;
+
+            setTimeout(() => {
+                // Redirect to country-specific dashboard
+                if (countryPages[country]) {
+                    window.location.href = countryPages[country];
+                } else {
+                    // Fallback to adventures page
+                    window.location.href = `pages/adventures.html?country=${country}`;
+                }
+            }, 1500);
+        }
+
+        // Add floating mountain effect
+        document.body.addEventListener('mousemove', function(e) {
+            const card = document.querySelector('.dashboard-card');
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+            const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+
+            card.style.transform = `perspective(1000px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg)`;
+        });
+
+        document.body.addEventListener('mouseleave', function() {
+            const card = document.querySelector('.dashboard-card');
+            card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+        });
+    </script>
+</body>
+</html>

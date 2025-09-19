@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Nepal Adventures</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Login to your Nepal Adventures account - Access exclusive trekking and adventure experiences in Nepal and across Asia">
+    <meta name="keywords" content="Nepal Adventures login, trekking login, adventure travel account, Nepal tourism">
+    <meta name="author" content="Nepal Adventures">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Login - Nepal Adventures">
+    <meta property="og:description" content="Login to your Nepal Adventures account for exclusive adventure experiences">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nepaladventures.com/login">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Beautiful mountain login page */
+        body {
+            background: linear-gradient(135deg,
+                rgba(44, 85, 48, 0.9) 0%,
+                rgba(52, 73, 94, 0.8) 50%,
+                rgba(41, 128, 185, 0.7) 100%),
+                url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat fixed;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            font-family: var(--font-family);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1464822759844-d150a8f9e692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            z-index: -2;
+            animation: parallaxMove 20s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg,
+                rgba(44, 85, 48, 0.1) 0%,
+                rgba(155, 89, 182, 0.1) 25%,
+                rgba(52, 152, 219, 0.1) 50%,
+                rgba(46, 204, 113, 0.1) 75%,
+                rgba(241, 196, 15, 0.1) 100%);
+            z-index: -1;
+            animation: colorShift 15s ease-in-out infinite;
+        }
+
+        @keyframes parallaxMove {
+            0%, 100% { transform: scale(1) translateY(0px); }
+            50% { transform: scale(1.05) translateY(-20px); }
+        }
+
+        @keyframes colorShift {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.1; }
+        }
+
+        /* Beautiful header with Nepal colors */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 100;
+        }
+
+        /* Beautiful auth container */
+        .auth-container {
+            backdrop-filter: blur(20px);
+            padding: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 80px);
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            animation: floatIn 1s ease-out, breathe 6s ease-in-out infinite;
+            border-radius: var(--border-radius-large);
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            transition: var(--transition);
+        }
+
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .auth-card h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .auth-subtitle {
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        /* Form styling consistency */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(44, 85, 48, 0.3);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 1);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(44, 85, 48, 0.3);
+        }
+
+        /* Floating mountain peaks */
+        .mountain-peaks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .peak {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: floatPeak 10s ease-in-out infinite;
+        }
+
+        .peak:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .peak:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+        .peak:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+        .peak:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 6s; }
+
+        @keyframes floatPeak {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Snow particles */
+        .snow-particle {
+            position: fixed;
+            color: rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+            z-index: 1;
+            animation: snowfall 8s linear infinite;
+        }
+
+        @keyframes snowfall {
+            to {
+                transform: translateY(100vh) translateX(100px) rotate(360deg);
+            }
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        /* Button styling to match main interface */
+        .btn-primary {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 1.5rem 0;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Auth links */
+        .auth-link {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .auth-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .auth-link a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        /* Social login section */
+        .social-login {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .social-login p {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        .social-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--bg-light);
+            transform: translateY(-1px);
+        }
+
+        .google-btn:hover {
+            border-color: #db4437;
+            color: #db4437;
+        }
+
+        .facebook-btn:hover {
+            border-color: #4267B2;
+            color: #4267B2;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 2rem 1rem;
+            }
+
+            .auth-card {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .social-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Subtle animation on load */
+        .auth-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mountain peaks animation -->
+    <div class="mountain-peaks">
+        <div class="peak">🏔️</div>
+        <div class="peak">⛰️</div>
+        <div class="peak">🗻</div>
+        <div class="peak">🏔️</div>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="../index.html">
+                        <i class="fas fa-mountain"></i>
+                        <span>Nepal Adventures</span>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="explore.html">Explore</a></li>
+                    <li><a href="adventures.html">Adventures</a></li>
+                    <li><a href="guides.html">Guides & Porters</a></li>
+                    <li><a href="register.html" class="btn-register">Register</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="auth-container">
+        <div class="container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>Welcome Back</h2>
+                    <p class="auth-subtitle">Sign in to your adventure account</p>
+                </div>
+
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Enter your password">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="remember" name="remember">
+                            <span>Remember me for 30 days</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </button>
+
+                    <div class="auth-link">
+                        <a href="forgot-password.html">Forgot your password?</a>
+                    </div>
+
+                    <div class="social-login">
+                        <p>Or continue with</p>
+                        <div class="social-buttons">
+                            <a href="#" class="social-btn google-btn">
+                                <i class="fab fa-google"></i>
+                                <span>Google</span>
+                            </a>
+                            <a href="#" class="social-btn facebook-btn">
+                                <i class="fab fa-facebook-f"></i>
+                                <span>Facebook</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="auth-link">
+                        <p>Don't have an account? <a href="register.html">Create one now</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+
+    <script>
+        // Beautiful mountain login page effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create snow particles
+            function createSnowParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'snow-particle';
+                particle.textContent = Math.random() < 0.7 ? '❄️' : '✨';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+
+                document.body.appendChild(particle);
+
+                setTimeout(() => {
+                    particle.remove();
+                }, 8000);
+            }
+
+            // Generate snow particles periodically
+            setInterval(createSnowParticle, 1000);
+
+            // Initial burst of particles
+            for (let i = 0; i < 10; i++) {
+                setTimeout(createSnowParticle, i * 200);
+            }
+
+            // Enhanced form animations
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'scale(1.02)';
+                    this.style.boxShadow = '0 0 30px rgba(44, 85, 48, 0.3)';
+                });
+
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'scale(1)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+
+            // Add mountain climbing animation to the form
+            const authCard = document.querySelector('.auth-card');
+            authCard.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.01)';
+                this.style.boxShadow = '0 25px 80px rgba(0, 0, 0, 0.3)';
+            });
+
+            authCard.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.2)';
+            });
+
+            // Welcome message with mountain gradient
+            setTimeout(() => {
+                const title = document.querySelector('.auth-card h2');
+                title.style.background = 'linear-gradient(135deg, var(--primary-color), #3498db, #27ae60)';
+                title.style.webkitBackgroundClip = 'text';
+                title.style.webkitTextFillColor = 'transparent';
+                title.style.backgroundClip = 'text';
+                title.style.animation = 'shimmer 3s infinite';
+
+                // Add shimmer animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes shimmer {
+                        0% { background-position: -200% 0; }
+                        100% { background-position: 200% 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+                title.style.backgroundSize = '200% 100%';
+            }, 1000);
+
+            // Handle login form submission
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const remember = document.getElementById('remember').checked;
+                    const submitBtn = loginForm.querySelector('button[type="submit"]');
+
+                    // Disable submit button and show loading state
+                    const originalText = submitBtn.textContent;
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = '🏔️ Climbing...';
+                    submitBtn.style.background = 'linear-gradient(135deg, #95a5a6, #7f8c8d)';
+
+                    try {
+                        // Call the login API
+                        const response = await window.API.auth.login({ email, password });
+
+                        if (response.success && response.token && response.user) {
+                            // Store authentication data
+                            localStorage.setItem('token', response.token);
+                            localStorage.setItem('user', JSON.stringify(response.user));
+
+                            // Set expiration based on remember checkbox
+                            if (remember) {
+                                const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
+                                localStorage.setItem('tokenExpiration', expirationDate.toISOString());
+                            } else {
+                                const expirationDate = new Date(Date.now() + 24 * 60 * 60 * 1000); // 1 day
+                                localStorage.setItem('tokenExpiration', expirationDate.toISOString());
+                            }
+
+                            // Show success message
+                            submitBtn.textContent = '🏔️ Summit Reached!';
+                            submitBtn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+
+                            // Redirect after short delay
+                            setTimeout(() => {
+                                window.location.href = '../dashboard.html';
+                            }, 1500);
+                        } else {
+                            throw new Error(response.message || 'Login failed');
+                        }
+                    } catch (error) {
+                        console.error('Login error:', error);
+
+                        // Show error message
+                        submitBtn.textContent = '❌ Failed to reach summit';
+                        submitBtn.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+
+                        // Show user-friendly error message
+                        const errorMessage = error.message.includes('Network error')
+                            ? 'Connection error - please check if the server is running'
+                            : error.message || 'Login failed. Please try again.';
+
+                        alert(`⛰️ ${errorMessage}`);
+
+                        // Reset button after delay
+                        setTimeout(() => {
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = originalText;
+                            submitBtn.style.background = '';
+                        }, 3000);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

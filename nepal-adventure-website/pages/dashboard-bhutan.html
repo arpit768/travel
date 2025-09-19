@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhutan Adventures Dashboard - Land of the Thunder Dragon</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Bhutan-specific styling */
+        :root {
+            --current-primary: #FFD700;
+            --current-secondary: #FF4500;
+            --current-accent: #800080;
+            --current-bg: linear-gradient(135deg, #FFD700 0%, #FF4500 100%);
+            --current-card-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        body {
+            background: var(--current-bg);
+        }
+
+        .dragon-text {
+            background: linear-gradient(45deg, #FFD700, #FF4500, #800080);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s infinite;
+        }
+
+        .prayer-flag-animation {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prayer-flag-animation::before {
+            content: '🏳️‍🌈';
+            position: absolute;
+            font-size: 1.5rem;
+            animation: wave 3s ease-in-out infinite;
+            top: -5px;
+            right: -5px;
+            opacity: 0.4;
+        }
+
+        .mountain-pattern {
+            background-image:
+                radial-gradient(circle at 25% 75%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 25%, rgba(255, 69, 0, 0.1) 0%, transparent 50%);
+        }
+
+        .happiness-meter {
+            background: linear-gradient(90deg, #FFD700, #FF4500);
+            border-radius: 20px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+            animation: glow 2s infinite alternate;
+        }
+
+        .dzong-architecture {
+            border-radius: 0;
+            border-top: 20px solid var(--current-primary);
+            border-bottom: 5px solid var(--current-secondary);
+            position: relative;
+        }
+
+        .dzong-architecture::before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid var(--current-primary);
+        }
+    </style>
+</head>
+<body class="country-bhutan">
+    <div class="dashboard-container">
+        <!-- Bhutan-specific header -->
+        <header class="dashboard-header mountain-pattern">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-dragon"></i>
+                    <span class="dragon-text">Thunder Dragon Adventures</span>
+                </div>
+                <div class="country-selector-header">
+                    <div class="current-country">
+                        <span class="country-flag">🇧🇹</span>
+                        <span class="country-name">Bhutan</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="country-dropdown" id="countryDropdown">
+                        <div class="country-option" onclick="window.location.href='dashboard.html'">
+                            <span class="flag">🌍</span>
+                            <span class="name">Main Dashboard</span>
+                            <span class="status available">Switch</span>
+                        </div>
+                        <div class="country-option active" data-country="bhutan" data-flag="🇧🇹">
+                            <span class="flag">🇧🇹</span>
+                            <span class="name">Bhutan</span>
+                            <span class="status available">Current</span>
+                        </div>
+                        <div class="country-option" onclick="window.location.href='dashboard.html?country=nepal'">
+                            <span class="flag">🇳🇵</span>
+                            <span class="name">Nepal</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <div class="country-option" onclick="window.location.href='dashboard-india.html'">
+                            <span class="flag">🇮🇳</span>
+                            <span class="name">India</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <div class="country-option" onclick="window.location.href='dashboard-tibet.html'">
+                            <span class="flag">🏔️</span>
+                            <span class="name">Tibet</span>
+                            <span class="status available">Available</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <span class="user-name">Kuzuzangpo, Admin</span>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-main">
+            <!-- Bhutan-specific sidebar -->
+            <aside class="dashboard-sidebar prayer-flag-animation dzong-architecture">
+                <nav class="dashboard-nav">
+                    <ul class="nav-menu">
+                        <li class="nav-item active">
+                            <a href="#overview" class="nav-link" data-section="overview">
+                                <i class="fas fa-chart-dashboard"></i>
+                                <span>Overview</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#adventures" class="nav-link" data-section="adventures">
+                                <i class="fas fa-mountain"></i>
+                                <span>Sacred Journeys</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#dzongs" class="nav-link" data-section="dzongs">
+                                <i class="fas fa-castle"></i>
+                                <span>Dzongs & Monasteries</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#festivals" class="nav-link" data-section="festivals">
+                                <i class="fas fa-masks-theater"></i>
+                                <span>Tsechus (Festivals)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#happiness" class="nav-link" data-section="happiness">
+                                <i class="fas fa-smile"></i>
+                                <span>Happiness Index</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#guides-porters" class="nav-link" data-section="guides-porters">
+                                <i class="fas fa-users"></i>
+                                <span>Guides & Sherpa</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#bookings" class="nav-link" data-section="bookings">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Bookings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="dashboard-content">
+                <!-- Overview Section -->
+                <section id="overview" class="content-section active">
+                    <div class="section-header dzong-architecture">
+                        <h1 class="dragon-text">Land of the Thunder Dragon Dashboard</h1>
+                        <p>🐉 Kuzuzangpo! Welcome to Gross National Happiness central</p>
+                    </div>
+
+                    <!-- Happiness Meter -->
+                    <div class="happiness-meter">
+                        <h3>🌈 Gross National Happiness Index: 97.3% 😊</h3>
+                        <p>Bhutan leads the world in sustainable happiness and environmental conservation</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card mountain-pattern dzong-architecture">
+                            <div class="stat-icon">
+                                <i class="fas fa-castle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalDzongs">108</h3>
+                                <p>Sacred Dzongs</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+8%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card mountain-pattern dzong-architecture">
+                            <div class="stat-icon">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="forestCoverage">71%</h3>
+                                <p>Forest Coverage</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+2%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card mountain-pattern dzong-architecture">
+                            <div class="stat-icon">
+                                <i class="fas fa-masks-theater"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalTsechus">45</h3>
+                                <p>Annual Tsechus</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+15%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card mountain-pattern dzong-architecture">
+                            <div class="stat-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="carbonNegative">-2.5M</h3>
+                                <p>Carbon Negative (tons)</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+12%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bhutan-specific widgets -->
+                    <div class="dashboard-widgets">
+                        <div class="widget dzong-architecture">
+                            <div class="widget-header">
+                                <h3>🎭 Sacred Tsechu Festivals</h3>
+                                <button class="btn-secondary btn-sm">View All</button>
+                            </div>
+                            <div class="widget-content">
+                                <div class="tsechu-list">
+                                    <div class="tsechu-item">
+                                        <span class="tsechu-icon">🎪</span>
+                                        <div class="tsechu-info">
+                                            <h5>Paro Tsechu</h5>
+                                            <p>Sacred mask dances at Paro Dzong</p>
+                                            <small>April 11-15</small>
+                                        </div>
+                                        <span class="booking-count">85 pilgrims</span>
+                                    </div>
+                                    <div class="tsechu-item">
+                                        <span class="tsechu-icon">🏔️</span>
+                                        <div class="tsechu-info">
+                                            <h5>Thimphu Drupchen</h5>
+                                            <p>Capital city celebration</p>
+                                            <small>September 20-22</small>
+                                        </div>
+                                        <span class="booking-count">120 visitors</span>
+                                    </div>
+                                    <div class="tsechu-item">
+                                        <span class="tsechu-icon">🙏</span>
+                                        <div class="tsechu-info">
+                                            <h5>Bumthang Jambay Lhakhang</h5>
+                                            <p>Ancient temple festival</p>
+                                            <small>October 15-17</small>
+                                        </div>
+                                        <span class="booking-count">65 devotees</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="widget dzong-architecture">
+                            <div class="widget-header">
+                                <h3>🏰 Sacred Dzongs & Monasteries</h3>
+                                <button class="btn-secondary btn-sm">View All</button>
+                            </div>
+                            <div class="widget-content">
+                                <div class="dzong-list">
+                                    <div class="dzong-item">
+                                        <span class="dzong-icon">🏰</span>
+                                        <div class="dzong-info">
+                                            <h5>Paro Taktsang (Tiger's Nest)</h5>
+                                            <p>Cliff-hanging monastery</p>
+                                            <small>3,120m altitude</small>
+                                        </div>
+                                        <span class="dzong-status">Sacred Site</span>
+                                    </div>
+                                    <div class="dzong-item">
+                                        <span class="dzong-icon">🏛️</span>
+                                        <div class="dzong-info">
+                                            <h5>Punakha Dzong</h5>
+                                            <p>Palace of Great Happiness</p>
+                                            <small>1637 AD</small>
+                                        </div>
+                                        <span class="dzong-status">Ancient Fort</span>
+                                    </div>
+                                    <div class="dzong-item">
+                                        <span class="dzong-icon">🕯️</span>
+                                        <div class="dzong-info">
+                                            <h5>Tashichho Dzong</h5>
+                                            <p>Seat of government</p>
+                                            <small>Thimphu capital</small>
+                                        </div>
+                                        <span class="dzong-status">Active Dzong</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dzongs Section -->
+                <section id="dzongs" class="content-section">
+                    <div class="section-header dzong-architecture">
+                        <h1>🏰 Sacred Dzongs & Monasteries</h1>
+                        <button class="btn-primary">
+                            <i class="fas fa-plus"></i> Add Sacred Site
+                        </button>
+                    </div>
+                    <div class="dzongs-content">
+                        <div class="dzongs-grid">
+                            <!-- Dzong cards will be loaded here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Happiness Section -->
+                <section id="happiness" class="content-section">
+                    <div class="section-header dzong-architecture">
+                        <h1>😊 Gross National Happiness Metrics</h1>
+                        <p>Tracking the four pillars of GNH</p>
+                    </div>
+                    <div class="happiness-content">
+                        <div class="happiness-pillars">
+                            <div class="pillar-card dzong-architecture">
+                                <h3>🌱 Environmental Conservation</h3>
+                                <div class="pillar-metric">
+                                    <span class="metric-value">71%</span>
+                                    <span class="metric-label">Forest Coverage</span>
+                                </div>
+                            </div>
+                            <div class="pillar-card dzong-architecture">
+                                <h3>🏛️ Good Governance</h3>
+                                <div class="pillar-metric">
+                                    <span class="metric-value">94%</span>
+                                    <span class="metric-label">Trust in Government</span>
+                                </div>
+                            </div>
+                            <div class="pillar-card dzong-architecture">
+                                <h3>🎭 Cultural Preservation</h3>
+                                <div class="pillar-metric">
+                                    <span class="metric-value">88%</span>
+                                    <span class="metric-label">Cultural Participation</span>
+                                </div>
+                            </div>
+                            <div class="pillar-card dzong-architecture">
+                                <h3>💰 Sustainable Development</h3>
+                                <div class="pillar-metric">
+                                    <span class="metric-value">92%</span>
+                                    <span class="metric-label">Economic Satisfaction</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Other sections would follow similar pattern -->
+            </main>
+        </div>
+    </div>
+
+    <!-- Bhutan-specific styles -->
+    <style>
+        .tsechu-item, .dzong-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+        }
+
+        .tsechu-item:hover, .dzong-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateX(10px);
+        }
+
+        .tsechu-icon, .dzong-icon {
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .tsechu-info h5, .dzong-info h5 {
+            color: var(--current-primary);
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .booking-count, .dzong-status {
+            font-weight: 700;
+            color: var(--current-secondary);
+            font-size: 0.9rem;
+            margin-left: auto;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 69, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        .happiness-pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pillar-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--current-card-shadow);
+            border: 2px solid var(--current-primary);
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .pillar-card:nth-child(2) { animation-delay: 0.5s; }
+        .pillar-card:nth-child(3) { animation-delay: 1s; }
+        .pillar-card:nth-child(4) { animation-delay: 1.5s; }
+
+        .pillar-card h3 {
+            color: var(--current-primary);
+            margin-bottom: 1rem;
+        }
+
+        .metric-value {
+            display: block;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--current-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .dzongs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="../js/api.js"></script>
+    <script>
+        // Bhutan-specific dashboard initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            // Force Bhutan country setting
+            const dashboard = new DashboardManager();
+            dashboard.currentCountry = 'bhutan';
+            dashboard.setupCountryTheming();
+
+            // Setup country selector dropdown
+            const currentCountry = document.querySelector('.current-country');
+            const dropdown = document.getElementById('countryDropdown');
+
+            currentCountry.addEventListener('click', () => {
+                dropdown.classList.toggle('show');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.country-selector-header')) {
+                    dropdown.classList.remove('show');
+                }
+            });
+
+            // Bhutan-specific greeting
+            setTimeout(() => {
+                dashboard.showNotification('🐉 Kuzuzangpo! Welcome to the Land of the Thunder Dragon!', 'success');
+            }, 1000);
+
+            // Add special Bhutanese animations
+            addBhutaneseAnimations();
+        });
+
+        function addBhutaneseAnimations() {
+            // Add prayer flag flutter effect
+            const prayerFlags = ['🏳️‍🌈', '🎌', '🚩'];
+            setInterval(() => {
+                if (Math.random() < 0.2) {
+                    createPrayerFlag(prayerFlags[Math.floor(Math.random() * prayerFlags.length)]);
+                }
+            }, 4000);
+
+            // Add dragon breath effect
+            setInterval(() => {
+                if (Math.random() < 0.1) {
+                    createDragonBreath();
+                }
+            }, 8000);
+        }
+
+        function createPrayerFlag(flag) {
+            const prayer = document.createElement('div');
+            prayer.textContent = flag;
+            prayer.style.cssText = `
+                position: fixed;
+                font-size: 1.2rem;
+                color: var(--current-primary);
+                pointer-events: none;
+                z-index: 1000;
+                left: ${Math.random() * window.innerWidth}px;
+                top: -50px;
+                animation: prayerFlagFall 6s ease-out forwards;
+                opacity: 0.8;
+            `;
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes prayerFlagFall {
+                    to {
+                        transform: translateY(${window.innerHeight + 100}px) rotate(180deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(prayer);
+
+            setTimeout(() => {
+                prayer.remove();
+                style.remove();
+            }, 6000);
+        }
+
+        function createDragonBreath() {
+            const breath = document.createElement('div');
+            breath.textContent = '🐉';
+            breath.style.cssText = `
+                position: fixed;
+                font-size: 3rem;
+                pointer-events: none;
+                z-index: 1000;
+                left: -100px;
+                top: ${Math.random() * (window.innerHeight - 100)}px;
+                animation: dragonFly 5s ease-out forwards;
+                opacity: 0.6;
+            `;
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes dragonFly {
+                    to {
+                        transform: translateX(${window.innerWidth + 200}px) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(breath);
+
+            setTimeout(() => {
+                breath.remove();
+                style.remove();
+            }, 5000);
+        }
+    </script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Adventures - Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #e74c3c;
+            text-align: center;
+        }
+        .links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .link-card {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .link-card:hover {
+            border-color: #e74c3c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .link-card h3 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+        .link-card p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .status {
+            margin-top: 30px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 5px;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏔️ Nepal Adventures Website</h1>
+        <p style="text-align: center; color: #666;">Complete Adventure Platform for Nepal Tourism</p>
+        
+        <div class="status">
+            <strong>✅ Full-Stack Platform Ready!</strong><br>
+            Frontend + Backend + Database integration complete. Real user registration, authentication, and API integration working!
+        </div>
+        
+        <div class="links">
+            <a href="index.html" class="link-card">
+                <h3>🏠 Homepage</h3>
+                <p>Landing page with country selection</p>
+            </a>
+            
+            <a href="pages/adventures.html" class="link-card">
+                <h3>🎒 Adventures</h3>
+                <p>Select from multiple adventure types</p>
+            </a>
+            
+            <a href="pages/guides.html" class="link-card">
+                <h3>👥 Guides & Porters</h3>
+                <p>Browse and book professionals</p>
+            </a>
+            
+            <a href="pages/register.html" class="link-card">
+                <h3>📝 Register</h3>
+                <p>Create account as Tourist/Guide/Porter</p>
+            </a>
+            
+            <a href="pages/login.html" class="link-card">
+                <h3>🔐 Login</h3>
+                <p>Sign in to your account</p>
+            </a>
+            
+            <a href="pages/register.html?type=guide" class="link-card">
+                <h3>🧗 Register as Guide</h3>
+                <p>Direct guide registration</p>
+            </a>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: #e8f5e9; border-radius: 5px;">
+            <h3 style="margin-top: 0; color: #2e7d32;">🚀 Backend API Features:</h3>
+            <ul style="color: #666;">
+                <li><strong>Authentication:</strong> JWT-based login/register system</li>
+                <li><strong>User Roles:</strong> Tourist, Guide, Porter, Gear Provider</li>
+                <li><strong>Database:</strong> MongoDB with complete schemas</li>
+                <li><strong>APIs:</strong> RESTful endpoints for all features</li>
+                <li><strong>Security:</strong> Password hashing, CORS, rate limiting</li>
+                <li><strong>Real-time:</strong> Live data from database</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 20px; background: #fef3e0; border-radius: 5px;">
+            <h3 style="margin-top: 0; color: #f39c12;">🌐 Frontend Features:</h3>
+            <ul style="color: #666;">
+                <li>Responsive design for all devices</li>
+                <li>Real user registration and login</li>
+                <li>Live guide and porter data from API</li>
+                <li>Adventure search and filtering</li>
+                <li>Professional UI/UX design</li>
+                <li>Session management and authentication</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 20px; background: #e3f2fd; border-radius: 5px;">
+            <h3 style="margin-top: 0; color: #1976d2;">⚡ Quick Start:</h3>
+            <ol style="color: #666;">
+                <li>Make sure MongoDB is running</li>
+                <li>Run <code>START_EVERYTHING.bat</code> to start backend</li>
+                <li>Open any HTML file to test the platform</li>
+                <li>Register as different user types to test features</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

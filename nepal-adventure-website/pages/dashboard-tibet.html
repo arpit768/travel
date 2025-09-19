@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tibet Adventures Dashboard - Roof of the World</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Tibet-specific styling */
+        :root {
+            --current-primary: #800000;
+            --current-secondary: #FFD700;
+            --current-accent: #4169E1;
+            --current-bg: linear-gradient(135deg, #800000 0%, #FFD700 100%);
+            --current-card-shadow: 0 10px 30px rgba(128, 0, 0, 0.3);
+        }
+
+        body {
+            background: var(--current-bg);
+        }
+
+        .tibet-text {
+            background: linear-gradient(45deg, #800000, #FFD700, #4169E1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s infinite;
+        }
+
+        .prayer-wheel-animation {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prayer-wheel-animation::before {
+            content: '☸️';
+            position: absolute;
+            font-size: 2rem;
+            animation: rotate 8s linear infinite;
+            top: -10px;
+            right: -10px;
+            opacity: 0.4;
+        }
+
+        .himalayan-pattern {
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(128, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+        }
+
+        .altitude-indicator {
+            background: linear-gradient(90deg, #800000, #FFD700);
+            border-radius: 20px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+            animation: pulse 3s infinite;
+        }
+
+        .monastery-architecture {
+            border-radius: 0;
+            border-top: 15px solid var(--current-primary);
+            border-bottom: 8px solid var(--current-secondary);
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(128, 0, 0, 0.1);
+        }
+
+        .monastery-architecture::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 20px solid var(--current-primary);
+        }
+
+        .snow-peak {
+            position: relative;
+        }
+
+        .snow-peak::after {
+            content: '🏔️';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.5rem;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .prayer-flags {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to right,
+                #FF0000 0%, #FF0000 20%,
+                #FFD700 20%, #FFD700 40%,
+                #0000FF 40%, #0000FF 60%,
+                #FFFFFF 60%, #FFFFFF 80%,
+                #008000 80%, #008000 100%
+            );
+            z-index: 10000;
+            opacity: 0.7;
+            animation: wave 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="country-tibet">
+    <!-- Prayer flags at top -->
+    <div class="prayer-flags"></div>
+
+    <div class="dashboard-container">
+        <!-- Tibet-specific header -->
+        <header class="dashboard-header himalayan-pattern">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-mountain"></i>
+                    <span class="tibet-text">Roof of the World Adventures</span>
+                </div>
+                <div class="country-selector-header">
+                    <div class="current-country">
+                        <span class="country-flag">🏔️</span>
+                        <span class="country-name">Tibet</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="country-dropdown" id="countryDropdown">
+                        <div class="country-option" onclick="window.location.href='dashboard.html'">
+                            <span class="flag">🌍</span>
+                            <span class="name">Main Dashboard</span>
+                            <span class="status available">Switch</span>
+                        </div>
+                        <div class="country-option active" data-country="tibet" data-flag="🏔️">
+                            <span class="flag">🏔️</span>
+                            <span class="name">Tibet</span>
+                            <span class="status available">Current</span>
+                        </div>
+                        <div class="country-option" onclick="window.location.href='dashboard.html?country=nepal'">
+                            <span class="flag">🇳🇵</span>
+                            <span class="name">Nepal</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <div class="country-option" onclick="window.location.href='dashboard-india.html'">
+                            <span class="flag">🇮🇳</span>
+                            <span class="name">India</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <div class="country-option" onclick="window.location.href='dashboard-bhutan.html'">
+                            <span class="flag">🇧🇹</span>
+                            <span class="name">Bhutan</span>
+                            <span class="status available">Available</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <span class="user-name">Tashi Delek, Admin</span>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-main">
+            <!-- Tibet-specific sidebar -->
+            <aside class="dashboard-sidebar prayer-wheel-animation monastery-architecture">
+                <nav class="dashboard-nav">
+                    <ul class="nav-menu">
+                        <li class="nav-item active">
+                            <a href="#overview" class="nav-link" data-section="overview">
+                                <i class="fas fa-chart-dashboard"></i>
+                                <span>Overview</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#adventures" class="nav-link" data-section="adventures">
+                                <i class="fas fa-mountain"></i>
+                                <span>High Altitude Treks</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#monasteries" class="nav-link" data-section="monasteries">
+                                <i class="fas fa-place-of-worship"></i>
+                                <span>Sacred Monasteries</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#pilgrimage" class="nav-link" data-section="pilgrimage">
+                                <i class="fas fa-route"></i>
+                                <span>Pilgrimage Routes</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#meditation" class="nav-link" data-section="meditation">
+                                <i class="fas fa-lotus"></i>
+                                <span>Meditation Retreats</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#guides-porters" class="nav-link" data-section="guides-porters">
+                                <i class="fas fa-users"></i>
+                                <span>Guides & Sherpa</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#bookings" class="nav-link" data-section="bookings">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Bookings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="dashboard-content">
+                <!-- Overview Section -->
+                <section id="overview" class="content-section active">
+                    <div class="section-header monastery-architecture">
+                        <h1 class="tibet-text">Roof of the World Dashboard</h1>
+                        <p>🏔️ Tashi Delek! Gateway to the highest spiritual peaks</p>
+                    </div>
+
+                    <!-- Altitude Indicator -->
+                    <div class="altitude-indicator">
+                        <h3>🌟 Average Elevation: 4,500m (14,764 ft) above sea level</h3>
+                        <p>Experience the world's highest plateau - where earth meets sky</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card himalayan-pattern monastery-architecture snow-peak">
+                            <div class="stat-icon">
+                                <i class="fas fa-place-of-worship"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalMonasteries">1,700</h3>
+                                <p>Sacred Monasteries</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+5%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card himalayan-pattern monastery-architecture snow-peak">
+                            <div class="stat-icon">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalPeaks">8,000m+</h3>
+                                <p>Himalayan Peaks</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+3%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card himalayan-pattern monastery-architecture snow-peak">
+                            <div class="stat-icon">
+                                <i class="fas fa-route"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalPilgrims">50,000</h3>
+                                <p>Annual Pilgrims</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+12%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card himalayan-pattern monastery-architecture snow-peak">
+                            <div class="stat-icon">
+                                <i class="fas fa-lotus"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="meditationHours">10,000+</h3>
+                                <p>Meditation Hours</p>
+                            </div>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+25%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tibet-specific widgets -->
+                    <div class="dashboard-widgets">
+                        <div class="widget monastery-architecture">
+                            <div class="widget-header">
+                                <h3>🏔️ Sacred Pilgrimage Routes</h3>
+                                <button class="btn-secondary btn-sm">View All</button>
+                            </div>
+                            <div class="widget-content">
+                                <div class="pilgrimage-list">
+                                    <div class="pilgrimage-item">
+                                        <span class="pilgrimage-icon">🕉️</span>
+                                        <div class="pilgrimage-info">
+                                            <h5>Mount Kailash Kora</h5>
+                                            <p>Sacred circumambulation of holy mountain</p>
+                                            <small>4,675m - 15 days</small>
+                                        </div>
+                                        <span class="booking-count">45 pilgrims</span>
+                                    </div>
+                                    <div class="pilgrimage-item">
+                                        <span class="pilgrimage-icon">🏛️</span>
+                                        <div class="pilgrimage-info">
+                                            <h5>Potala Palace Circuit</h5>
+                                            <p>Former Dalai Lama residence</p>
+                                            <small>3,700m - 3 days</small>
+                                        </div>
+                                        <span class="booking-count">120 visitors</span>
+                                    </div>
+                                    <div class="pilgrimage-item">
+                                        <span class="pilgrimage-icon">🌅</span>
+                                        <div class="pilgrimage-info">
+                                            <h5>Everest Base Camp Tibet</h5>
+                                            <p>North face approach to world's highest peak</p>
+                                            <small>5,150m - 12 days</small>
+                                        </div>
+                                        <span class="booking-count">85 adventurers</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="widget monastery-architecture">
+                            <div class="widget-header">
+                                <h3>🏯 Ancient Monasteries</h3>
+                                <button class="btn-secondary btn-sm">View All</button>
+                            </div>
+                            <div class="widget-content">
+                                <div class="monastery-list">
+                                    <div class="monastery-item">
+                                        <span class="monastery-icon">🏯</span>
+                                        <div class="monastery-info">
+                                            <h5>Potala Palace</h5>
+                                            <p>Winter palace of Dalai Lama</p>
+                                            <small>1,000 rooms - 13 stories</small>
+                                        </div>
+                                        <span class="monastery-status">UNESCO Site</span>
+                                    </div>
+                                    <div class="monastery-item">
+                                        <span class="monastery-icon">🕯️</span>
+                                        <div class="monastery-info">
+                                            <h5>Jokhang Temple</h5>
+                                            <p>Most sacred temple in Tibet</p>
+                                            <small>7th century - Spiritual heart</small>
+                                        </div>
+                                        <span class="monastery-status">Sacred Site</span>
+                                    </div>
+                                    <div class="monastery-item">
+                                        <span class="monastery-icon">⛩️</span>
+                                        <div class="monastery-info">
+                                            <h5>Samye Monastery</h5>
+                                            <p>First Buddhist monastery in Tibet</p>
+                                            <small>779 AD - Historical</small>
+                                        </div>
+                                        <span class="monastery-status">Ancient Site</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Monasteries Section -->
+                <section id="monasteries" class="content-section">
+                    <div class="section-header monastery-architecture">
+                        <h1>🏯 Sacred Monasteries & Temples</h1>
+                        <button class="btn-primary">
+                            <i class="fas fa-plus"></i> Add Sacred Site
+                        </button>
+                    </div>
+                    <div class="monasteries-content">
+                        <div class="monasteries-grid">
+                            <!-- Monastery cards will be loaded here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Meditation Section -->
+                <section id="meditation" class="content-section">
+                    <div class="section-header monastery-architecture">
+                        <h1>🧘 Meditation & Retreat Centers</h1>
+                        <p>Find inner peace at the top of the world</p>
+                    </div>
+                    <div class="meditation-content">
+                        <div class="meditation-centers">
+                            <div class="meditation-card monastery-architecture">
+                                <h3>🌸 Mindfulness Retreats</h3>
+                                <div class="meditation-metric">
+                                    <span class="metric-value">7-21</span>
+                                    <span class="metric-label">Days Duration</span>
+                                </div>
+                            </div>
+                            <div class="meditation-card monastery-architecture">
+                                <h3>☸️ Buddhist Philosophy</h3>
+                                <div class="meditation-metric">
+                                    <span class="metric-value">4,500m</span>
+                                    <span class="metric-label">Altitude Practice</span>
+                                </div>
+                            </div>
+                            <div class="meditation-card monastery-architecture">
+                                <h3>🕉️ Spiritual Awakening</h3>
+                                <div class="meditation-metric">
+                                    <span class="metric-value">1,000+</span>
+                                    <span class="metric-label">Years Tradition</span>
+                                </div>
+                            </div>
+                            <div class="meditation-card monastery-architecture">
+                                <h3>🌅 Sunrise Meditation</h3>
+                                <div class="meditation-metric">
+                                    <span class="metric-value">5:30 AM</span>
+                                    <span class="metric-label">Daily Practice</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Other sections would follow similar pattern -->
+            </main>
+        </div>
+    </div>
+
+    <!-- Tibet-specific styles -->
+    <style>
+        .pilgrimage-item, .monastery-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+        }
+
+        .pilgrimage-item:hover, .monastery-item:hover {
+            background: rgba(128, 0, 0, 0.1);
+            transform: translateX(10px);
+        }
+
+        .pilgrimage-icon, .monastery-icon {
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .pilgrimage-info h5, .monastery-info h5 {
+            color: var(--current-primary);
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .booking-count, .monastery-status {
+            font-weight: 700;
+            color: var(--current-secondary);
+            font-size: 0.9rem;
+            margin-left: auto;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        .meditation-centers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .meditation-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--current-card-shadow);
+            border: 2px solid var(--current-primary);
+            text-align: center;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .meditation-card:nth-child(2) { animation-delay: 1s; }
+        .meditation-card:nth-child(3) { animation-delay: 2s; }
+        .meditation-card:nth-child(4) { animation-delay: 3s; }
+
+        .meditation-card h3 {
+            color: var(--current-primary);
+            margin-bottom: 1rem;
+        }
+
+        .metric-value {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--current-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .monasteries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="../js/api.js"></script>
+    <script>
+        // Tibet-specific dashboard initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            // Force Tibet country setting
+            const dashboard = new DashboardManager();
+            dashboard.currentCountry = 'tibet';
+            dashboard.setupCountryTheming();
+
+            // Setup country selector dropdown
+            const currentCountry = document.querySelector('.current-country');
+            const dropdown = document.getElementById('countryDropdown');
+
+            currentCountry.addEventListener('click', () => {
+                dropdown.classList.toggle('show');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.country-selector-header')) {
+                    dropdown.classList.remove('show');
+                }
+            });
+
+            // Tibet-specific greeting
+            setTimeout(() => {
+                dashboard.showNotification('🏔️ Tashi Delek! Welcome to the Roof of the World!', 'success');
+            }, 1000);
+
+            // Add special Tibetan animations
+            addTibetanAnimations();
+        });
+
+        function addTibetanAnimations() {
+            // Add prayer wheel spinning effect
+            const prayerWheels = ['☸️', '🕉️', '⚪'];
+            setInterval(() => {
+                if (Math.random() < 0.15) {
+                    createPrayerWheel(prayerWheels[Math.floor(Math.random() * prayerWheels.length)]);
+                }
+            }, 5000);
+
+            // Add floating lotus petals
+            setInterval(() => {
+                if (Math.random() < 0.2) {
+                    createLotusPetal();
+                }
+            }, 6000);
+
+            // Add mountain wind effect
+            setInterval(() => {
+                if (Math.random() < 0.1) {
+                    createMountainWind();
+                }
+            }, 10000);
+        }
+
+        function createPrayerWheel(symbol) {
+            const wheel = document.createElement('div');
+            wheel.textContent = symbol;
+            wheel.style.cssText = `
+                position: fixed;
+                font-size: 2rem;
+                color: var(--current-primary);
+                pointer-events: none;
+                z-index: 1000;
+                left: ${Math.random() * window.innerWidth}px;
+                top: ${Math.random() * window.innerHeight}px;
+                animation: spinAndFade 4s ease-out forwards;
+                opacity: 0.8;
+            `;
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes spinAndFade {
+                    0% { transform: rotate(0deg) scale(1); opacity: 0.8; }
+                    100% { transform: rotate(1440deg) scale(0.2); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(wheel);
+
+            setTimeout(() => {
+                wheel.remove();
+                style.remove();
+            }, 4000);
+        }
+
+        function createLotusPetal() {
+            const petal = document.createElement('div');
+            petal.textContent = '🌸';
+            petal.style.cssText = `
+                position: fixed;
+                font-size: 1.5rem;
+                color: var(--current-secondary);
+                pointer-events: none;
+                z-index: 1000;
+                left: ${Math.random() * window.innerWidth}px;
+                top: -50px;
+                animation: petalFloat 8s ease-out forwards;
+                opacity: 0.9;
+            `;
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes petalFloat {
+                    to {
+                        transform: translateY(${window.innerHeight + 100}px) translateX(${(Math.random() - 0.5) * 200}px) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(petal);
+
+            setTimeout(() => {
+                petal.remove();
+                style.remove();
+            }, 8000);
+        }
+
+        function createMountainWind() {
+            const wind = document.createElement('div');
+            wind.textContent = '💨';
+            wind.style.cssText = `
+                position: fixed;
+                font-size: 2rem;
+                pointer-events: none;
+                z-index: 1000;
+                left: -100px;
+                top: ${Math.random() * (window.innerHeight - 100)}px;
+                animation: windBlow 6s ease-out forwards;
+                opacity: 0.5;
+            `;
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes windBlow {
+                    to {
+                        transform: translateX(${window.innerWidth + 200}px) scale(0.5);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(wind);
+
+            setTimeout(() => {
+                wind.remove();
+                style.remove();
+            }, 6000);
+        }
+    </script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

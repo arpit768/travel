@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Adventures Dashboard - Nepal Adventures</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explore India's magnificent Himalayan adventures - Kashmir, Himachal, Ladakh">
+    <meta name="keywords" content="india, kashmir, himachal, ladakh, himalaya, trekking">
+    <meta name="author" content="Nepal Adventures">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg,
+                rgba(255, 153, 51, 0.95) 0%,
+                rgba(255, 102, 0, 0.9) 30%,
+                rgba(255, 69, 0, 0.85) 70%,
+                rgba(205, 92, 92, 0.9) 100%),
+                url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3') center/cover no-repeat fixed;
+            min-height: 100vh;
+            font-family: var(--font-family);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating India elements */
+        .india-element {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2rem;
+            opacity: 0.1;
+            z-index: 1;
+            animation: floatIndia 18s ease-in-out infinite;
+        }
+
+        @keyframes floatIndia {
+            0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            25% { transform: translateY(-40px) translateX(30px) rotate(45deg); }
+            50% { transform: translateY(-20px) translateX(-20px) rotate(180deg); }
+            75% { transform: translateY(-50px) translateX(10px) rotate(270deg); }
+        }
+
+        .country-dashboard {
+            backdrop-filter: blur(20px);
+            padding: 2rem 0;
+            min-height: 100vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border-radius: var(--border-radius-large);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideDown 1s ease-out;
+        }
+
+        .dashboard-header h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .dashboard-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-large);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+            animation: floatIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(255, 102, 0, 0.3);
+        }
+
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .region-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border-radius: var(--border-radius-large);
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(255, 102, 0, 0.2);
+            transition: all 0.3s ease;
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .region-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(255, 102, 0, 0.3);
+        }
+
+        .region-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .region-icon {
+            font-size: 2.5rem;
+        }
+
+        .region-title {
+            color: #ff6600;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .explore-btn {
+            background: linear-gradient(135deg, #ff9933, #ff6600);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 102, 0, 0.3);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff6600;
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.1);
+            background: white;
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.3);
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.3s; }
+        .stat-card:nth-child(3) { animation-delay: 0.5s; }
+        .stat-card:nth-child(4) { animation-delay: 0.7s; }
+
+        .region-card:nth-child(1) { animation-delay: 0.2s; }
+        .region-card:nth-child(2) { animation-delay: 0.4s; }
+        .region-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .adventures-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .adventures-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 102, 0, 0.1);
+            color: var(--text-color);
+        }
+
+        .adventures-list li:last-child {
+            border-bottom: none;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <a href="../dashboard.html" class="back-btn" title="Back to Dashboard">🏠</a>
+
+    <div class="country-dashboard">
+        <div class="dashboard-header">
+            <h1>
+                <span style="font-size: 4rem;">🕌</span>
+                India Adventures
+            </h1>
+            <p>Incredible India - Where ancient traditions meet majestic mountains</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <button onclick="window.location.href='../pages/adventures.html?country=india'" class="explore-btn">
+                    🎒 Explore All India Adventures
+                </button>
+                <button onclick="window.location.href='../pages/guides.html?country=india'" class="explore-btn" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                    🗺️ Find India Guides
+                </button>
+            </div>
+        </div>
+
+        <div class="stats-overview">
+            <div class="stat-card">
+                <div class="stat-number" id="total-adventures">0</div>
+                <h3>Adventures</h3>
+                <p>Incredible journeys</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="avg-price">$0</div>
+                <h3>Avg. Price</h3>
+                <p>Starting from</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="max-altitude">0m</div>
+                <h3>Max Altitude</h3>
+                <p>Himalayan heights</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-days">0</div>
+                <h3>Total Days</h3>
+                <p>Adventure time</p>
+            </div>
+        </div>
+
+        <div class="regions-grid">
+            <div class="region-card">
+                <div class="region-header">
+                    <span class="region-icon">🏔️</span>
+                    <h3 class="region-title">Kashmir</h3>
+                </div>
+                <p>Paradise on Earth with pristine alpine lakes, meadows, and snow-capped peaks.</p>
+                <ul class="adventures-list" id="kashmir-adventures">
+                    <li>Loading Kashmir adventures...</li>
+                </ul>
+                <button onclick="exploreRegion('kashmir')" class="explore-btn">🏔️ Explore Kashmir</button>
+            </div>
+
+            <div class="region-card">
+                <div class="region-header">
+                    <span class="region-icon">⛰️</span>
+                    <h3 class="region-title">Himachal Pradesh</h3>
+                </div>
+                <p>Land of Gods with beautiful valleys, ancient temples, and adventure sports.</p>
+                <ul class="adventures-list" id="himachal-adventures">
+                    <li>Coming soon - Manali, Shimla, Spiti adventures</li>
+                </ul>
+                <button onclick="exploreRegion('himachal')" class="explore-btn">⛰️ Explore Himachal</button>
+            </div>
+
+            <div class="region-card">
+                <div class="region-header">
+                    <span class="region-icon">🏜️</span>
+                    <h3 class="region-title">Ladakh</h3>
+                </div>
+                <p>Little Tibet with high-altitude deserts, monasteries, and epic landscapes.</p>
+                <ul class="adventures-list" id="ladakh-adventures">
+                    <li>Coming soon - Leh, Nubra Valley, Pangong adventures</li>
+                </ul>
+                <button onclick="exploreRegion('ladakh')" class="explore-btn">🏜️ Explore Ladakh</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            if (!window.API.utils.isLoggedIn()) {
+                window.location.href = '../pages/login.html';
+                return;
+            }
+
+            // Create floating India elements
+            createFloatingElements();
+
+            // Load India adventures data
+            loadIndiaData();
+        });
+
+        function createFloatingElements() {
+            const elements = ['🕌', '🏛️', '🎭', '🐘', '🦚', '🪔', '🏔️', '⛰️', '🌸', '🎪'];
+
+            for (let i = 0; i < 12; i++) {
+                const element = document.createElement('div');
+                element.className = 'india-element';
+                element.textContent = elements[Math.floor(Math.random() * elements.length)];
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.top = Math.random() * 100 + 'vh';
+                element.style.animationDelay = Math.random() * 18 + 's';
+                element.style.animationDuration = (Math.random() * 8 + 12) + 's';
+                document.body.appendChild(element);
+            }
+        }
+
+        async function loadIndiaData() {
+            try {
+                // Load all India adventures
+                const response = await window.API.adventures.getAll({ country: 'india' });
+                const adventures = response.data || [];
+
+                // Update overall stats
+                updateOverallStats(adventures);
+
+                // Update region data
+                updateRegionData(adventures);
+
+            } catch (error) {
+                console.error('Error loading India data:', error);
+                document.getElementById('total-adventures').textContent = 'Error';
+            }
+        }
+
+        function updateOverallStats(adventures) {
+            // Total adventures
+            document.getElementById('total-adventures').textContent = adventures.length;
+
+            // Average price
+            const avgPrice = adventures.length > 0
+                ? Math.round(adventures.reduce((sum, adv) => sum + adv.pricing.basePrice, 0) / adventures.length)
+                : 0;
+            document.getElementById('avg-price').textContent = `$${avgPrice}`;
+
+            // Max altitude (simulate based on adventure)
+            const maxAltitude = adventures.length > 0
+                ? Math.max(...adventures.map(adv => {
+                    if (adv.title.includes('Kashmir')) return 4200;
+                    if (adv.title.includes('Ladakh')) return 5600;
+                    if (adv.title.includes('Himachal')) return 4500;
+                    return 3500 + (adv.difficulty.physicalDemand * 200);
+                }))
+                : 0;
+            document.getElementById('max-altitude').textContent = `${maxAltitude}m`;
+
+            // Total days
+            const totalDays = adventures.reduce((sum, adv) => sum + adv.duration.days, 0);
+            document.getElementById('total-days').textContent = totalDays;
+        }
+
+        function updateRegionData(adventures) {
+            // Since we're using region 'other' in the database, let's categorize based on title
+            const kashmir = adventures.filter(adv => adv.title.toLowerCase().includes('kashmir'));
+
+            if (kashmir.length > 0) {
+                const list = document.getElementById('kashmir-adventures');
+                list.innerHTML = kashmir.map(adv => `
+                    <li>
+                        <strong>${adv.title}</strong> - ${adv.duration.days} days, $${adv.pricing.basePrice}
+                    </li>
+                `).join('');
+            }
+        }
+
+        function exploreRegion(region) {
+            // For now, redirect to adventures page with India filter
+            // In a real app, you'd have more specific region filtering
+            window.location.href = `../pages/adventures.html?country=india`;
+        }
+
+        // Add interactive effects
+        document.querySelectorAll('.stat-card, .region-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = this.classList.contains('stat-card')
+                    ? 'translateY(-8px) scale(1.05)'
+                    : 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
